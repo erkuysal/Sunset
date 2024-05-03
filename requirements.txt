@@ -1,0 +1,11 @@
+# ------ Loaded ------
+django
+djangorestframework
+django-cors-headers
+strawberry-graphql-django
+django-choices-field
+# ------ Not Loaded ------
+graphene-django
+
+apollo
+axios
