@@ -5,4 +5,10 @@ from django.http import HttpResponse
 
 
 def home(request):
-    return render(request, 'dawn/home.html')
+    title = 'Home'
+    return render(request, 'home.html', {'title': title})
+
+
+def sunrise(request):
+    title = 'Sunrise'
+    return render(request, 'sunrise.html', {'title': title})
