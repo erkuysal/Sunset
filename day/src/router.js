@@ -1,24 +1,16 @@
-import {createWebHistory, createRouter} from "vue-router";
+import { createMemoryHistory, createRouter } from 'vue-router'
 
-import Home from './apps/Home.vue';
-import Sunrise from "@/apps/Sunrise.vue";
+import HomeView from './components/HomeView.vue'
+import SunriseView from './components/SunriseView.vue'
 
 const routes = [
-    {
-        path: '/',
-        name: 'Home',
-        component: Home
-    },
-    {
-        path: '/sunrise',
-        name: 'Sunrise',
-        component: Sunrise
-    }
-];
+  { path: '/', component: HomeView },
+  { path: '/sunrise', component: SunriseView },
+]
 
 const router = createRouter({
-    history: createWebHistory(),
-    routes: routes,
-});
+  history: createMemoryHistory(),
+  routes,
+})
 
-export default router;
+export default router
