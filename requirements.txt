@@ -4,6 +4,7 @@ djangorestframework
 django-cors-headers
 strawberry-graphql-django
 django-choices-field
+djoser
 # ------ Not Loaded ------
 graphene-django
 

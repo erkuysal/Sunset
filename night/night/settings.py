@@ -29,7 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # URL of the Vue Vite development server
+    "http://localhost:8080",  # URL of the Vue Vite development server
 ]
 
 # Application definition
@@ -45,7 +45,9 @@ INSTALLED_APPS = [
     'dawn.apps.DawnConfig',
     # ------------ FRONTEND CONNECTIONS -------------------
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
+    'djoser',
 ]
 
 MIDDLEWARE = [
