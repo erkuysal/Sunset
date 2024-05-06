@@ -4,4 +4,5 @@ from django.http import HttpResponse
 
 
 def hub(request):
-    return HttpResponse("Hello, world. You're at the first hub.")
+    return render(request, 'hub.html')
+
