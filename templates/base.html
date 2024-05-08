@@ -11,10 +11,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@100..700&family=Audiowide&family=Jersey+10&family=Silkscreen:wght@400;700&family=VT323&display=swap" rel="stylesheet">
 
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <title>{{ title }}</title>
 </head>
 <body>
+
+    {% block header %}
+    {% endblock %}
+
+    {% block navbar %}
+    {% endblock %}
 
     {% block content %}
     {% endblock %}
