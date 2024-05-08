@@ -3,6 +3,8 @@ __pycache__/
 *.pyo
 .idea/
 .env
+db.*
+*.sqlite3
 
 # Logs
 logs
