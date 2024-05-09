@@ -1,9 +1,29 @@
 {% extends 'base.html' %}
 
-{% block header %}
-    <h1 class="font-8bit text-center py-4 bg-dark">HELLO WORLD</h1>
+{% block content %}
+
+    <header style="margin-top: 50px">
+    {% block header %}
+        <h1 class="font-8bit text-center py-4 bg-dark">HELLO WORLD</h1>
+    {% endblock %}
+    </header>
+
+    <nav>
+        {% block navbar %}
+            {% include 'components/navbar.html' %}
+        {% endblock %}
+    </nav>
+
+    {% block main %}
+        <div class="" style="height: 1000px; background-color: rgb(255,235,198)">
+
+        </div>
+    {% endblock %}
+
+
+    {% block footer %}
+        {% include 'components/footer.html' %}
+    {% endblock %}
+
 {% endblock %}
 
-{% block content %}
-    <h1 class="color-text">HELLO</h1>
-{% endblock %}

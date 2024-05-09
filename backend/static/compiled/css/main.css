@@ -9276,15 +9276,6 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important; } }
 
-.color-text {
-  color: white; }
-
-.color-header {
-  color: #ffe6a8; }
-
-.color-header:hover {
-  color: #ffcc00; }
-
 * {
   box-sizing: border-box;
   margin: 0;
