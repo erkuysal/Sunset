@@ -16,16 +16,16 @@
 </head>
 <body class="bg-dark">
 
-    {% block navbar %}
-        {% include 'components/navbar.html' %}
-    {% endblock %}
+    <div class="vh-100">
+        {% block content %}
+        {% endblock %}
+    </div>
 
-    {% block content %}
-    {% endblock %}
-
+    <div class="bottom-0 mt-auto">
     {% block footer %}
         {% include 'components/footer.html' %}
     {% endblock %}
+    </div>
 
 </body>
 </html>

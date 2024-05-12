@@ -7,11 +7,11 @@
         {% endblock %}
     </header>
 
-    <nav>
+    <div class="fixed-top">
         {% block navbar %}
             {% include 'components/navbar.html' %}
         {% endblock %}
-    </nav>
+    </div>
 
     {% block main %}
         <div class="" style="height: 1000px; background-color: rgb(255,235,198)">
@@ -20,9 +20,11 @@
     {% endblock %}
 
 
-    {% block footer %}
-        {% include 'components/footer.html' %}
-    {% endblock %}
+    <div class="bottom-0">
+        {% block footer %}
+            {% include 'components/footer.html' %}
+        {% endblock %}
+    </div>
 
 {% endblock %}
 
