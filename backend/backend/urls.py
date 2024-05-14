@@ -18,13 +18,13 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from strawberry.django.views import AsyncGraphQLView
-from first.schema import schema
+# from strawberry.django.views import AsyncGraphQLView
+# from first.schema import schema
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('graphql', AsyncGraphQLView.as_view(schema=schema)),
+#   path('graphql', AsyncGraphQLView.as_view(schema=schema)),
 
     path('', include('first.urls')),
 

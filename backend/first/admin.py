@@ -25,7 +25,8 @@ class CustomUserAdmin(UserAdmin):
     list_filter = ('is_active',)
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
-        ('Important dates', {'fields': ('date_joined',)}),
+        ('Permissions', {'fields': ('is_active', 'is_staff')}),
+        # Removed date_joined from here as well
     )
     add_fieldsets = (
         (None, {

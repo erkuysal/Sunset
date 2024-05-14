@@ -4,25 +4,29 @@
     <div class="container text-center font-8bit mt-5 position-relative">
         <div class="position-absolute top-50 start-50 translate-middle" style="margin-top: 25% ">
             <form>
+            {% csrf_token %}
 
                 <div class="mb-3">
                     <h1>Join Us!</h1>
                 </div>
 
                 <div class="mb-3">
-                    USERNAME
+                    <label class="form-label">{{ form.username.label }}</label>
+                    <input type="text" class="form-control">
                 </div>
 
                 <div class="mb-3">
-                    PASSWORD
+                    <label class="form-label">{{ form.password1.label }}</label>
+                    <input type="password" class="form-control">
+                </div>
+
+                <div class="mb-5">
+                    <label class="form-label">{{ form.password2.label }}</label>
+                    <input type="password" class="form-control">
                 </div>
 
                 <div class="mb-3">
-                    CONFIRM PASSWORD
-                </div>
-
-                <div class="mb-3">
-                    SIGN UP BUTTON
+                   <button type="submit" class="btn btn-outline-light">Submit</button>
                 </div>
 
             </form>
