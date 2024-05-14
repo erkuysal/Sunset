@@ -3,6 +3,7 @@ django
 djangorestframework
 django-cors-headers
 strawberry-graphql-django
+strawberry-django-auth
 django-choices-field
 djoser
 # ------ Not Loaded ------
