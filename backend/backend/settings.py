@@ -33,15 +33,16 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Application definition
 
 INSTALLED_APPS = [
+    # ---------- BUILT-INS --------------
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # --------------------------
+    # --------- LOCAL APPS --------------
     'first.apps.FirstConfig',
-    # --------------------------
+    # ---------- PLUG-INS ----------------
     'rest_framework',
     'corsheaders',
     "strawberry_django",
