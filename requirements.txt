@@ -7,6 +7,5 @@ django-choices-field
 djoser
 # ------ Not Loaded ------
 graphene-django
-
 apollo
 axios
