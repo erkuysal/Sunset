@@ -31,10 +31,11 @@ class CustomUserAdmin(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'password1', 'password2', 'is_active')}
+            'fields': ('username', 'password1', 'password2', 'is_active')
+        }
         ),
     )
-    readonly_fields = ('joined_at',)
+    readonly_fields = ('joined_at', 'email')
     search_fields = ('username',)
     ordering = ('username',)
 

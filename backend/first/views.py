@@ -1,10 +1,8 @@
-from django.contrib.auth import login
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.urls import reverse_lazy
-from django.views import generic
-from .forms import SignUpForm
+from django.contrib.auth import login
+from django.contrib import messages
 
+from .forms import CustomUserForm
 # Create your views here.
 
 
@@ -14,13 +12,13 @@ def hub(request):
 
 def sign_up(request):
     if request.method == 'POST':
-        form = SignUpForm(request.POST)
+        form = CustomUserForm(request.POST)
         if form.is_valid():
-            user = form.save()  # Save the new user object
-            login(request, user)  # Log in the user immediately after signing up
-            return redirect('hub')  # Redirect to a home page or dashboard
+            form.save()
+            messages.success(request, 'User registered successfully.')
+            return redirect('hub')  # Change 'login' to the name of your login URL
     else:
-        form = SignUpForm()
+        form = CustomUserForm()
 
     return render(request, 'register/sign-up.html', {'title': 'Join Us', 'form': form})
 

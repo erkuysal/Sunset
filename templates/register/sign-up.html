@@ -1,42 +1,62 @@
 {% extends 'template.html' %}
+{% load custom_filters %}
+
+{% block head %}
+    <style>
+        .invalid-feedback {
+            display: block;
+        }
+    </style>
+{% endblock %}
 
 {% block content %}
     <div class="container text-center font-8bit mt-5 position-relative">
-        <div class="position-absolute top-50 start-50 translate-middle" style="margin-top: 25% ">
-            <form>
+        <div class="position-absolute top-50 start-50 translate-middle" style="margin-top: 25%;">
+
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <form method="post">
             {% csrf_token %}
 
                 <div class="mb-4">
                     <h1>Join Us!</h1>
                 </div>
 
-                    <div style="font-family: lores-9-plus-wide, sans-serif;
-                        font-weight: 400;
-                        font-style: normal;
-                        font-size: large;
-                        font-stretch: semi-expanded;">
+                <div style="font-family: lores-9-plus-wide, sans-serif;
+                    font-weight: 400;
+                    font-style: normal;
+                    font-size: large;
+                    font-stretch: semi-expanded;">
 
-                        <div class="mb-3 form-group">
-                             <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
-                             <input type="text" name="{{ form.username.name }}"
-                                    id="{{ form.username.id_for_label }}" class="form-control" />
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
-                            <input type="text" name="{{ form.password1.name }}"
-                                    id="{{ form.password1.id_for_label }}" class="form-control" />
-                        </div>
-
-                        <div class="mb-5">
-                            <label for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
-                            <input type="text" name="{{ form.password2.name }}"
-                                    id="{{ form.password2.id_for_label }}" class="form-control" />
-                        </div>
-
+                    <div class="mb-3">
+                        <label for="{{ form.email.id_for_label }}" class="form-label">{{ form.email.label }}</label>
+                        {{ form.email|add_class:"form-control" }}
                     </div>
 
-                <div class="mb-3">
+                    <div class="mb-3">
+                        <label for="{{ form.username.id_for_label }}" class="form-label">{{ form.username.label }}</label>
+                        {{ form.username|add_class:"form-control" }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="{{ form.password.id_for_label }}" class="form-label">{{ form.password.label }}</label>
+                        {{ form.password|add_class:"form-control"  }}
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="{{ form.confirm_password.id_for_label }}" class="form-label">{{ form.confirm_password.label }}</label>
+                        {{ form.confirm_password|add_class:"form-control"  }}
+                    </div>
+
+                </div>
+
+                <div>
                    <button type="submit" class="btn btn-outline-light">Submit</button>
                 </div>
 
