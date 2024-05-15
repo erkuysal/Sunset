@@ -34,6 +34,7 @@ class CustomUserAdmin(UserAdmin):
             'fields': ('username', 'password1', 'password2', 'is_active')}
         ),
     )
+    readonly_fields = ('joined_at',)
     search_fields = ('username',)
     ordering = ('username',)
 

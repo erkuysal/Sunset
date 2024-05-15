@@ -9287,3 +9287,13 @@ textarea.form-control-lg {
   font-weight: 400;
   font-style: italic;
   color: #ffe6a8; }
+
+.font-4bit {
+  font-family: "VT323", monospace !important;
+  font-weight: 400;
+  font-style: italic;
+  font-size: xxx-large;
+  color: #ffe6a8; }
+
+.vh-90 {
+  height: 90vh !important; }

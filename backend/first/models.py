@@ -26,6 +26,10 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
+    class Meta:
+        verbose_name = "Account"
+        verbose_name_plural = "Accounts"
+
     username = models.CharField(max_length=25, unique=True)
     email = models.EmailField(unique=True)
 
