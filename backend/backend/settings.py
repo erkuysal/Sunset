@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-from gqlauth.settings_type import GqlAuthSettings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+AUTH_USER_MODEL = 'first.CustomUser'
+LOGIN_URL = 'sign-in'
+
 
 # Application definition
 
@@ -42,11 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # --------- LOCAL APPS --------------
     'first.apps.FirstConfig',
+    'center.apps.CenterConfig',
     # ---------- PLUG-INS ----------------
     'rest_framework',
     'corsheaders',
-    "strawberry_django",
-    "gqlauth",
 ]
 
 MIDDLEWARE = [
@@ -59,21 +59,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # ------------------------------------------------------
     'corsheaders.middleware.CorsMiddleware',
-    'gqlauth.core.middlewares.django_jwt_middleware'
 ]
 
 ROOT_URLCONF = 'backend.urls'
-
-AUTH_USER_MODEL = 'first.CustomUser'
-
-AUTHENTICATION_BACKENDS = [
-    "django.contrib.auth.backends.ModelBackend",
-]
-
-GQL_AUTH = GqlAuthSettings(
-    LOGIN_REQUIRE_CAPTCHA=False,
-    REGISTER_REQUIRE_CAPTCHA=False,
-)
 
 TEMPLATES = [
     {
@@ -86,6 +74,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # ----------------- LINK PROCESSORS -----------------
+                'first.utilities.context_processors.register_nav_links',
             ],
         },
     },

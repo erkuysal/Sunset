@@ -1,18 +1,14 @@
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
 @import url('https://fonts.googleapis.com/css2?family=Antonio:wght@100..700&family=Audiowide&family=Jersey+10&family=Silkscreen:wght@400;700&family=VT323&display=swap');
-@import 'components/colours.scss';
+
+// base
+@import 'themes/dark';
 
 
-*{
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  background-color: rgb(41,41,41);
-}
+// components
+@import 'components/colours';
+@import 'components/fonts';
 
-.font-8bit{
-  font-family: "Silkscreen" , sans-serif;
-  font-weight: 400;
-  font-style: italic;
-  color: $color-header;
-}
+// layouts
+@import 'layout/spacing';
+

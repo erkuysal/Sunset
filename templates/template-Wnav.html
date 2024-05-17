@@ -18,6 +18,12 @@
 </head>
 <body class="bg-dark">
 
+    <div class="fixed-top">
+        {% block navbar %}
+            {% include 'components/navbar.html' %}
+        {% endblock %}
+    </div>
+
     <div class="" style="height: 90vh;">
         {% block content %}
         {% endblock %}
