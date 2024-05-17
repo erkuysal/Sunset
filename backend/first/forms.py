@@ -35,3 +35,8 @@ class CustomUserForm(forms.ModelForm):
         return user
 
 
+class SignInForm(forms.Form):
+    username = forms.CharField(widget=forms.TextInput, required=True)
+    password = forms.CharField(widget=forms.PasswordInput, required=True)
+
+

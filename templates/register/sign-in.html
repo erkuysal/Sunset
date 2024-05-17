@@ -2,11 +2,8 @@
 {% load custom_filters %}
 
 {% block head %}
-    <style>
-        .invalid-feedback {
-            display: block;
-        }
-    </style>
+
+
 {% endblock %}
 
 {% block content %}
@@ -25,7 +22,7 @@
             {% csrf_token %}
 
                 <div class="mb-4">
-                    <h1>Join Us!</h1>
+                    <h1>Come In</h1>
                 </div>
 
                 <div style="font-family: lores-9-plus-wide, sans-serif;
@@ -33,11 +30,6 @@
                     font-style: normal;
                     font-size: large;
                     font-stretch: semi-expanded;">
-
-                    <div class="mb-3">
-                        <label for="{{ form.email.id_for_label }}" class="form-label">{{ form.email.label }}</label>
-                        {{ form.email|add_class:"form-control" }}
-                    </div>
 
                     <div class="mb-3">
                         <label for="{{ form.username.id_for_label }}" class="form-label">{{ form.username.label }}</label>
@@ -48,19 +40,13 @@
                         <label for="{{ form.password.id_for_label }}" class="form-label">{{ form.password.label }}</label>
                         {{ form.password|add_class:"form-control"  }}
                     </div>
-
-                    <div class="mb-4">
-                        <label for="{{ form.confirm_password.id_for_label }}" class="form-label">{{ form.confirm_password.label }}</label>
-                        {{ form.confirm_password|add_class:"form-control"  }}
-                    </div>
                 </div>
 
                 <div>
-                   <button type="submit" class="btn btn-outline-light">Sign Up</button>
+                   <button type="submit" class="btn btn-outline-light">Sign In</button>
                 </div>
 
             </form>
         </div>
     </div>
 {% endblock %}
-

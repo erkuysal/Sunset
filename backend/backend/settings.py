@@ -28,6 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'first.CustomUser'
+LOGIN_URL = 'sign-in'
 
 
 # Application definition
