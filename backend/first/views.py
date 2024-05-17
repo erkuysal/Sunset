@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 
 from .forms import CustomUserForm, SignInForm
@@ -42,6 +42,13 @@ def sign_in(request):
     return render(request, 'register/sign-in.html', {'title': 'Come in', 'form': form})
 
 
+def sign_out(request):
+    logout(request)
+    return redirect('hub')
+
+
 @login_required(login_url='/sign-in/', redirect_field_name='redirect_to')
 def profile(request):
     return render(request, 'register/profile.html', {'title': 'Profile'})
+
+
