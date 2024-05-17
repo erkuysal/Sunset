@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # --------- LOCAL APPS --------------
     'first.apps.FirstConfig',
+    'center.apps.CenterConfig',
     # ---------- PLUG-INS ----------------
     'rest_framework',
     'corsheaders',

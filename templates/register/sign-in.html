@@ -2,8 +2,19 @@
 {% load custom_filters %}
 
 {% block head %}
+    <style>
+        .invalid-feedback {
+            display: block;
+        }
 
-
+        .font-3bit {
+            font-family: lores-9-plus-wide, sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: large;
+            font-stretch: semi-expanded;
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
@@ -45,6 +56,8 @@
                 <div>
                    <button type="submit" class="btn btn-outline-light">Sign In</button>
                 </div>
+
+                <p class="mt-5 font-3bit">Don't have an account? <a href="{% url 'sign-up' %}">Sign Up</a></p>
 
             </form>
         </div>
