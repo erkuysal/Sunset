@@ -7,10 +7,6 @@ from .forms import CustomUserForm, SignInForm
 # Create your views here.
 
 
-def hub(request):
-    return render(request, 'main/hub.html', {'title': 'To The?'})
-
-
 def sign_up(request):
     if request.method == 'POST':
         form = CustomUserForm(request.POST)
