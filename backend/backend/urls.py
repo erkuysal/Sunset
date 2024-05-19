@@ -27,7 +27,7 @@ urlpatterns = [
 #   path('graphql', AsyncGraphQLView.as_view(schema=schema)),
 
     path('', include('center.urls')),
-    path('register/', include('first.urls')),
+    path('user/', include('first.urls')),
 
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

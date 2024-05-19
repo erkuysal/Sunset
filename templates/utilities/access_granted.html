@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <style>
+        .font-modifier{
+            font-size: 7em;
+            color: #3cbd0a;
+            text-shadow: 4px 4px #357021;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex h-100 text-center text-bg-dark font-8bit" onload="redirect()">
+
+        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+            <div class="mb-auto">
+            </div>
+
+            <main class="px-3">
+                <h1 class="mb-3 font-modifier">ACCESS GRANTED</h1>
+            </main>
+
+            <div class="mt-auto">
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+
+{% block jscript %}
+    <script type="text/javascript">
+        function redirect() {
+            var target_url = "{{ target_url }}";
+            setTimeout(function() {
+                window.location.href = target_url;
+            }, 3000); // Redirect after 3 seconds
+        }
+    </script>
+{% endblock %}
