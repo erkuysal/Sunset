@@ -4,8 +4,23 @@
     <style>
         .font-modifier{
             font-size: 7em;
-            color: #ea0808;
-            text-shadow: 4px 4px #702121;
+
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #result {
+            font-size: 7em;
+        }
+        .flash {
+            animation: flash 0.75s alternate 3; /* Flash 3 times */
+        }
+
+        @keyframes flash {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
     </style>
 {% endblock %}
@@ -18,7 +33,8 @@
             </div>
 
             <main class="px-3">
-                <h1 class="mb-3 font-modifier">ACCESS DENIED</h1>
+                <h1 class="font-modifier" id="pastWords"></h1>
+                <h1 class="font-modifier" id="currentWord"></h1>
             </main>
 
             <div class="mt-auto">
@@ -31,10 +47,86 @@
 
 {% block jscript %}
     <script type="text/javascript">
+        let words = ['>>Access', '>Denied<']
+        let currentWordIndex = 0;
+
+        const wordColors = ['#fff2e1', '#ef1111']
+        const shadowColors = ['rgba(255,204,0,0.2)', 'rgba(239,17,17,0.32)']
+
         function redirect() {
+            var target_url = "{{ target_url }}";
             setTimeout(function() {
-                window.location.href = "/";
-            }, 3000); // Redirect after 3 seconds
+                window.location.href = target_url;
+            }, 500); // Redirect after 0.75 seconds
         }
+
+
+        function displayWord(word) {
+            const lettersArray = word.split('');
+            const resultElement = document.getElementById('currentWord');
+            resultElement.textContent = '';
+            resultElement.style.color = wordColors[currentWordIndex]; // Set color based on word index
+            resultElement.style.textShadow = `4px 4px ${shadowColors[currentWordIndex]}`; // Set text shadow
+            let index = 0;
+
+            function showNextLetter() {
+                if (index < lettersArray.length) {
+                    resultElement.textContent += lettersArray[index];
+                    index++;
+                    setTimeout(showNextLetter, 100); // Adjust the timing here
+                } else {
+                    if (currentWordIndex === 0) {
+                        firstWordBehavior(resultElement);
+                    } else if (currentWordIndex === 1) {
+                        secondWordBehavior(resultElement);
+                    } else {
+                        flashWord(resultElement);
+                    }
+                }
+            }
+
+            showNextLetter();
+        }
+
+        function firstWordBehavior(element) {
+            // No flashing for the first word
+            const pastWordsElement = document.getElementById('pastWords');
+            const newWordElement = document.createElement('p');
+            newWordElement.textContent = element.textContent;
+            newWordElement.style.color = wordColors[currentWordIndex]; // Set color for past word
+            newWordElement.style.textShadow = `4px 4px ${shadowColors[currentWordIndex]}`; // Set text shadow for past word
+            pastWordsElement.appendChild(newWordElement);
+            element.textContent = '';
+            currentWordIndex++;
+            setTimeout(() => displayWord(words[currentWordIndex]), 500); // Delay before next word
+        }
+
+        function secondWordBehavior(element) {
+            flashWord(element); // Flashing behavior for the second word
+        }
+
+        function flashWord(element) {
+            element.classList.add('flash');
+            setTimeout(() => {
+                element.classList.remove('flash');
+                currentWordIndex++;
+                const pastWordsElement = document.getElementById('pastWords');
+                const newWordElement = document.createElement('p');
+                newWordElement.textContent = element.textContent;
+                pastWordsElement.appendChild(newWordElement);
+                element.textContent = '';
+                newWordElement.style.color = wordColors[currentWordIndex - 1]; // Set color for past word
+                if (currentWordIndex < words.length) {
+                    setTimeout(() => displayWord(words[currentWordIndex]), 500); // Delay before next word
+                } else {
+                    redirect();
+                }
+            }, 2250); // Flash animation duration (0.75s * 3)
+        }
+
+        window.onload = () => {
+            displayWord(words[currentWordIndex]);
+        };
     </script>
 {% endblock %}
+
