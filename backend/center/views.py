@@ -1,18 +1,17 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
+
+from backend.utilities.access_level import access_level_required
 
 # Create your views here.
 
 
+@login_required
+@access_level_required(5)
 def dashboard(request):
-    # Check if the user has the appropriate access level
-    if request.user.has_perm('your_app.your_permission'):  # Replace with your actual permission check
-        # Redirect to the access granted view with the target URL
-        return HttpResponseRedirect(f'/access/?next={request.path}')
-    else:
-        return render(request, 'utilities/access_denied.html')
-
-    #return render(request, 'center/dashboard.html', {'title': 'Command Center'})
+    return render(request, 'center/dashboard.html', {'title': 'Command Center'})
 
 
 # @login_required
@@ -35,6 +34,14 @@ def about(request):
 
 # -------------- utilities--------------
 def access_granted(request):
+    if not request.session.pop('show_access_granted', False):
+        return redirect(reverse('hub'))  # Replace 'home' with your homepage URL name
     target_url = request.GET.get('next', '/')
-    return render(request, 'utilities/access_granted.html', {'target_url': target_url, 'title': 'ACCESS GRANTED<'})
+    return render(request, 'utilities/access_granted.html', {'target_url': target_url, 'title': 'ACCESS GRANTED'})
+
+
+def access_denied(request):
+    if not request.session.pop('show_access_denied', False):
+        return redirect(reverse('hub'))  # Replace 'home' with your homepage URL name
+    return render(request, 'utilities/access_denied.html', {'title': 'ACCESS DENIED'})
 

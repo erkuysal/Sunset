@@ -24,18 +24,25 @@ class CustomUserAdmin(UserAdmin):
     list_display = ('username', 'is_active')
     list_filter = ('is_active',)
     fieldsets = (
-        (None, {'fields': ('username', 'password')}),
-        ('Permissions', {'fields': ('is_active', 'is_staff')}),
+        (None, {'fields': ('email', 'username', 'password')}),
+        ('Permissions', {'fields': ('is_active', 'is_staff', 'access_level')}),
         # Removed date_joined from here as well
     )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'password1', 'password2', 'is_active')
+            'fields': ('username', 'email', 'password1', 'password2', 'is_active')
         }
         ),
     )
-    readonly_fields = ('joined_at', 'email')
+
+    # readonly_fields = (
+    #     (None, {
+    #     'readonly_fields' : ()
+    # }),
+    # )
+
+    readonly_fields = ('joined_at',)
     search_fields = ('username',)
     ordering = ('username',)
 
