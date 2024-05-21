@@ -1,0 +1,23 @@
+{% extends 'template-Wnav' %}
+
+
+
+{% block content %}
+
+    <h2>{{ post.author.username }}</h2>
+    <p>{{ post.content }}</p>
+    <h3>Comments</h3>
+    {% for comment in post.comments.all %}
+        <div>
+            <h4>{{ comment.author.username }}</h4>
+            <p>{{ comment.content }}</p>
+        </div>
+    {% endfor %}
+    <h3>Add a Comment</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Comment</button>
+    </form>
+
+{% endblock %}

@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     # --------- LOCAL APPS --------------
     'first.apps.FirstConfig',
     'center.apps.CenterConfig',
-    'blog.apps.BlogConfig'
+    'blog.apps.BlogConfig',
     # ---------- PLUG-INS ----------------
     'rest_framework',
     'corsheaders',

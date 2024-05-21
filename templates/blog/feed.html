@@ -2,9 +2,19 @@
 
 
 {% block content %}
-    <div class="row mb-3 text-center font-8bit mt-5">
-        <div class="col-3 themed-grid-col">UTILITIES</div>
-        <div class="col-6 themed-grid-col">FEED</div>
-        <div class="col-3 themed-grid-col">NOTIFICATIONS</div>
-    </div>
+
+    <h2>Welcome, {{ user.username }}!</h2>
+    <a href="{% url 'post' %}">Create Post</a>
+    <h3>Posts</h3>
+    {% if post == False  %}
+    	{% for post in posts %}
+        <div>
+            <h4>{{ post.author.username }}</h4>
+            <p>{{ post.content }}</p>
+            <a href="{% url 'post_detail' post.id %}">Read more</a>
+        </div>
+        {% endfor %}
+    {% endif %}
+
+
 {% endblock %}
