@@ -44,7 +44,20 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
 
+    bio = models.TextField(blank=True)
+    date_of_birth = models.DateField(null=True, blank=True)
+#   profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True)
+    followers = models.ManyToManyField('self', symmetrical=False, related_name='following')
+
     objects = CustomUserManager()
 
     def __str__(self):
         return self.username
+
+
+class Post(models.Model):
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='posts')
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    likes = models.ManyToManyField(CustomUser, related_name='liked_posts', blank=True)
