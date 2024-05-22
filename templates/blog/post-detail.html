@@ -1,9 +1,9 @@
-{% extends 'template-Wnav' %}
+{% extends 'template-Wnav.html' %}
 
 
 
 {% block content %}
-
+<div class="container font-8bit mt-5">
     <h2>{{ post.author.username }}</h2>
     <p>{{ post.content }}</p>
     <h3>Comments</h3>
@@ -19,5 +19,6 @@
         {{ form.as_p }}
         <button type="submit">Add Comment</button>
     </form>
+</div>
 
 {% endblock %}
