@@ -35,14 +35,14 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container text-center font-8bit mt-5 position-relative">
+    <div class="container text-center font-8bit mt-5 position-relative ">
         <div class="position-absolute top-50 start-50 translate-middle" style="margin-top: 25%;">
             <form method="post">
                 {% csrf_token %}
 
                 <div class="mb-3 font-3bit">
                     <label for="{{ form.content.id_for_label }}" class="form-label">{{ form.content.label }}</label>
-                    {{ form.content|add_class:"post-box" }}
+                    {{ form.content|add_class: "post-box" }}
                 </div>
 
                 <div>
@@ -55,3 +55,5 @@
     </div>
 {% endblock %}
 
+{% block jscript %}
+{% endblock %}

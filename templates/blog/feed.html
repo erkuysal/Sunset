@@ -1,32 +1,118 @@
 {% extends 'template-Wnav.html' %}
 
+{% block head %}
+    <style>
+        .full-height {
+            height: 100%;
+        }
+
+        .content-container {
+            margin-top: 56px; /* Height of the navbar */
+        }
+        .scrollable-content {
+            overflow-y: auto;
+            height: 100%;
+        }
+        .fixed-column {
+            height: 100%;
+            position: sticky;
+            top: 56px; /* Height of the navbar */
+            overflow: auto;
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+        .post {
+            {#background-color: #f9f9f9;#}
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-box{
+            display: flex;
+            flex-direction: column;
+            padding-left: 0;
+            margin-bottom: 0;
+            border-radius: var(--bs-list-group-border-radius);
+        }
+
+        .list-group-item {
+            position: relative;
+            display: block;
+            padding: var(--bs-list-group-item-padding-y) var(--bs-list-group-item-padding-x);
+            color: var(--bs-list-group-color);
+            text-decoration: none;
+            /* background-color: var(--bs-list-group-bg); */
+            border: var(--bs-list-group-border-width) solid var(--bs-list-group-border-color);
+        }
+
+        .list-group-item-action {
+            width: 100%;
+            color: var(--bs-list-group-action-color);
+            text-align: inherit;
+        }
+    </style>
+{% endblock %}
+
 
 {% block content %}
-    <div class="container mt-5 font-8bit">
+    <div class="container-fluid full-height content-container font-8bit">
+        <div class="row full-height">
 
-        <h2>Welcome, {{ user.username }}!</h2>
-        <a href="{% url 'post' %}">Create Post</a>
-
-        <div class="row">
-            <div class="col-3"></div>
-
-            <div class="col-6">
-                <div class="container post-container text-center">
-                    <h3>Posts</h3>
-
-                        {% for post in posts %}
-                        <div>
-                            <h4>{{ post.author.username }}</h4>
-                            <p>{{ post.content }}</p>
-                            <a href="{% url 'post_detail' post.id %}">Read more</a>
-                        </div>
-                        {% endfor %}
+            <div class="col-md-3 fixed-column d-none d-md-block text-center">
+                <!-- Fixed left sidebar content here -->
+                <div>
+                    <h2>Welcome, {{ user.username }}!</h2>
+                    <a href="{% url 'post' %}">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="loadModalButton">
+                             < Post >
+                        </button>
+                    </a>
                 </div>
             </div>
 
-            <div class="col-3"></div>
-        </div>
+            <div class="col-md-6 scrollable-content">
+                <!-- Scrollable middle content here -->
+                <div class="container">
+                    <div class="post">
+                        <!-- Post content here -->
+                        {% for post in posts %}
+                            <div class="post-box border-bottom scroll-area my-3">
+                                <a href="{% url 'post_detail' post.id %}" class="list-group-item list-group-item-action active py-4 lh-sm" aria-current="true">
+                                    <div class="d-flex w-100 align-items-center justify-content-between mb-2">
+                                        <h4><strong class="mb-1">[POST HEADER]</strong></h4>
+                                        <small>{{ post.created_at }}</small>
+                                    </div>
 
+                                    <div class="col-10 mb-1 small">
+                                        <p>{{ post.content }}</p>
+                                    </div>
+
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <small>{{ post.author.username }}</small>
+                                    </div>
+
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <!-- Repeat .post for multiple posts -->
+                </div>
+            </div>
+
+            <div class="col-md-3 fixed-column d-none d-md-block">
+                <!-- Fixed right sidebar content here -->
+                <div>
+                    <p>Right Sidebar</p>
+                    <p>More content...</p>
+                    <p>More content...</p>
+                </div>
+            </div>
+
+        </div>
     </div>
 {% endblock %}
 
+{% block jscript %}
+{% endblock %}
