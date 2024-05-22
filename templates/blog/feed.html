@@ -2,19 +2,31 @@
 
 
 {% block content %}
+    <div class="container mt-5 font-8bit">
 
-    <h2>Welcome, {{ user.username }}!</h2>
-    <a href="{% url 'post' %}">Create Post</a>
-    <h3>Posts</h3>
-    {% if post == False  %}
-    	{% for post in posts %}
-        <div>
-            <h4>{{ post.author.username }}</h4>
-            <p>{{ post.content }}</p>
-            <a href="{% url 'post_detail' post.id %}">Read more</a>
+        <h2>Welcome, {{ user.username }}!</h2>
+        <a href="{% url 'post' %}">Create Post</a>
+
+        <div class="row">
+            <div class="col-3"></div>
+
+            <div class="col-6">
+                <div class="container post-container text-center">
+                    <h3>Posts</h3>
+
+                        {% for post in posts %}
+                        <div>
+                            <h4>{{ post.author.username }}</h4>
+                            <p>{{ post.content }}</p>
+                            <a href="{% url 'post_detail' post.id %}">Read more</a>
+                        </div>
+                        {% endfor %}
+                </div>
+            </div>
+
+            <div class="col-3"></div>
         </div>
-        {% endfor %}
-    {% endif %}
 
-
+    </div>
 {% endblock %}
+
