@@ -64,17 +64,21 @@
                 <!-- Fixed left sidebar content here -->
                 <div>
                     <h2>Welcome, {{ user.username }}!</h2>
-                    <a href="{% url 'post' %}">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="loadModalButton">
+                        <button  id="openModalBtn" type="button" class="btn btn-primary" data-bs-toggle="modal" >
                              < Post >
                         </button>
-                    </a>
                 </div>
+
+
+
             </div>
 
             <div class="col-md-6 scrollable-content">
                 <!-- Scrollable middle content here -->
                 <div class="container">
+
+
+
                     <div class="post">
                         <!-- Post content here -->
                         {% for post in posts %}
@@ -98,6 +102,8 @@
                         {% endfor %}
                     </div>
                     <!-- Repeat .post for multiple posts -->
+
+                    <div id="modalContainer"></div>
                 </div>
             </div>
 
@@ -115,4 +121,31 @@
 {% endblock %}
 
 {% block jscript %}
+<script>
+ document.addEventListener('DOMContentLoaded', () => {
+        const openModalBtn = document.getElementById('openModalBtn');
+        const modalContainer = document.getElementById('modalContainer');
+
+        openModalBtn.onclick = async () => {
+            try {
+                const response = await fetch('{% url "post" %}');
+                const modalHtml = await response.text();
+                modalContainer.innerHTML = modalHtml;
+                const modalElement = new bootstrap.Modal(document.getElementById('composePostModal'));
+                modalElement.show();
+
+                // Add event listener for closing the modal when clicking outside
+                document.addEventListener('click', (event) => {
+                    const modalContent = document.querySelector('.modal-content');
+                    if (modalElement._isShown && !modalContent.contains(event.target)) {
+                        modalElement.hide();
+                    }
+                });
+            } catch (error) {
+                console.error('Error loading modal content:', error);
+            }
+        };
+    });
+</script>
 {% endblock %}
+
