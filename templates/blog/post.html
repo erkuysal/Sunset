@@ -1,25 +1,28 @@
 {% load custom_filters %}
-<!-- compose_post_modal.html -->
+
+{% block head %}
+    <style>
+        *{
+            background-color: transparent;
+        }
+
+
+    </style>
+{% endblock %}
+
 <div class="modal fade" id="composePostModal" tabindex="-1" aria-labelledby="composePostModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-
-            <div class="modal-header">
-                <h5 class="modal-title" id="composePostModalLabel">Compose Post</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
 
             <div class="modal-body">
                 <form method="post" id="postForm">
                     {% csrf_token %}
                     <div class="mb-3">
                         <label for="{{ form.content.id_for_label }}" class="form-label">{{ form.content.label }}</label>
-                        {{ form.content|add_class:"form-control" }}
+                        {{ form.content|add_class:"" }}
                     </div>
                 </form>
-            </div>
 
-            <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" form="postForm">Post</button>
             </div>
 

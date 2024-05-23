@@ -128,7 +128,7 @@
 
         openModalBtn.onclick = async () => {
             try {
-                const response = await fetch('{% url "post" %}');
+                const response = await fetch('{% url 'post' %}');
                 const modalHtml = await response.text();
                 modalContainer.innerHTML = modalHtml;
                 const modalElement = new bootstrap.Modal(document.getElementById('composePostModal'));
