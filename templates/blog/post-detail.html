@@ -1,9 +1,20 @@
 {% extends 'template-Wnav.html' %}
 
-
+{% block head %}
+<style>
+        .font-3bit {
+            font-family: lores-9-plus-wide, sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: large;
+            font-stretch: semi-expanded;
+            color: #ffe6a8;
+        }
+</style>
+{% endblock %}
 
 {% block content %}
-<div class="container font-8bit mt-5">
+<div class="container font-3bit mt-5">
     <h2>{{ post.author.username }}</h2>
     <p>{{ post.content }}</p>
     <h3>Comments</h3>

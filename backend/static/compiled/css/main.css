@@ -9280,7 +9280,7 @@ textarea.form-control-lg {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background-color: #292929; }
+}
 
 .font-8bit {
   font-family: "Silkscreen" , sans-serif;
@@ -9294,6 +9294,136 @@ textarea.form-control-lg {
   font-style: italic;
   font-size: xxx-large;
   color: #ffe6a8; }
+
+.font-video {
+  font-family: video, serif;
+  font-weight: 400;
+  font-style: normal; }
+
+.lores-12-regular {
+  font-family: "lores-12", sans-serif;
+  font-weight: 400;
+  font-style: normal; }
+
+.lores-12-bold {
+  font-family: "lores-12", sans-serif;
+  font-weight: 700;
+  font-style: normal; }
+
+.lores-12-bold-alt-oakland {
+  font-family: "lores-12-bold-alt-oakland", sans-serif;
+  font-weight: 400;
+  font-style: normal; }
+
+.lores-12-narrow-regular {
+  font-family: "lores-12-narrow", sans-serif;
+  font-weight: 400;
+  font-style: normal; }
+
+.lores-15-bold {
+  font-family: "lores-15", sans-serif;
+  font-weight: 700;
+  font-style: normal; }
+
+.lores-15-bold-alt-oakland {
+  font-family: "lores-15-bold-alt-oakland", sans-serif;
+  font-weight: 400;
+  font-style: normal; }
+
+.lores-15-narrow-regular {
+  font-family: "lores-15-narrow", sans-serif;
+  font-weight: 400;
+  font-style: normal; }
+
+.lores-21-serif-regular {
+  font-family: "lores-21-serif", sans-serif;
+  font-weight: 400;
+  font-style: normal; }
+
+.lores-22-bold-oakland {
+  font-family: "lores-22-bold-oakland", sans-serif;
+  font-weight: 400;
+  font-style: normal; }
+
+.lores-22-narrow-regular {
+  font-family: "lores-22-narrow", sans-serif;
+  font-weight: 400;
+  font-style: normal; }
+
+.lores-22-serif-bold {
+  font-family: "lores-22-serif", sans-serif;
+  font-weight: 700;
+  font-style: normal; }
+
+.lores-28-regular {
+  font-family: "lores-28", sans-serif;
+  font-weight: 400;
+  font-style: normal; }
+
+.lores-28-narrow-regular {
+  font-family: "lores-28-narrow", sans-serif;
+  font-weight: 400;
+  font-style: normal; }
+
+.lores-9-minus-narrow-regular {
+  font-family: "lores-9-minus-narrow", sans-serif;
+  font-weight: 400;
+  font-style: normal; }
+
+.lores-9-minus-wide-regular {
+  font-family: "lores-9-minus-wide", sans-serif;
+  font-weight: 400;
+  font-style: normal; }
+
+.lores-9-narrow-regular {
+  font-family: "lores-9-narrow", sans-serif;
+  font-weight: 400;
+  font-style: normal; }
+
+.lores-9-narrow-bold {
+  font-family: "lores-9-narrow", sans-serif;
+  font-weight: 700;
+  font-style: normal; }
+
+.lores-9-plus-narrow-regular {
+  font-family: "lores-9-plus-narrow", sans-serif;
+  font-weight: 400;
+  font-style: normal; }
+
+.lores-9-plus-narrow-bold {
+  font-family: "lores-9-plus-narrow", sans-serif;
+  font-weight: 700;
+  font-style: normal; }
+
+.lores-9-plus-wide-regular {
+  font-family: "lores-9-plus-wide", sans-serif;
+  font-weight: 400;
+  font-style: normal; }
+
+.lores-9-plus-wide-bold {
+  font-family: "lores-9-plus-wide", sans-serif;
+  font-weight: 700;
+  font-style: normal; }
+
+.lores-9-plus-wide-bold-alt {
+  font-family: "lores-9-plus-wide-bold-alt", sans-serif;
+  font-weight: 400;
+  font-style: normal; }
+
+.lores-9-wide-regular {
+  font-family: "lores-9-wide", sans-serif;
+  font-weight: 400;
+  font-style: normal; }
+
+.lores-9-wide-bold {
+  font-family: "lores-9-wide", sans-serif;
+  font-weight: 700;
+  font-style: normal; }
+
+.lores-9-wide-bold-alt-oakland {
+  font-family: "lores-9-wide-bold-alt-oakland", sans-serif;
+  font-weight: 400;
+  font-style: normal; }
 
 .vh-90 {
   height: 90vh !important; }

@@ -6,24 +6,69 @@
             background-color: transparent;
         }
 
+        .font-3bit {
+            font-family: lores-9-plus-wide, sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: large;
+            font-stretch: semi-expanded;
+        }
+
+        .modifier{
+            padding-left: 1rem;
+            padding-top: 0.5rem;
+            border: none;
+            color: #ffe6a8;
+            resize: none;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus,
+        button:focus {
+            outline: none;
+        }
+
+
+        .modal{
+            margin-top: 10%;
+        }
+
+        .modal-dialog {
+            box-shadow: 13px 16px rgb(255, 230, 168);
+            border-radius: 8px;
+        }
+
+        .modal-body{
+            background-color: rgb(41,41,41);
+        }
+
+        .modal-footer{
+            justify-content: center;
+            border-top: none;
+            padding: 0;
+        }
+
 
     </style>
 {% endblock %}
 
-<div class="modal fade" id="composePostModal" tabindex="-1" aria-labelledby="composePostModalLabel" aria-hidden="true">
+<div class="modal fade font-3bit" id="composePostModal" tabindex="-1" aria-labelledby="composePostModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
 
             <div class="modal-body">
                 <form method="post" id="postForm">
                     {% csrf_token %}
-                    <div class="mb-3">
-                        <label for="{{ form.content.id_for_label }}" class="form-label">{{ form.content.label }}</label>
-                        {{ form.content|add_class:"" }}
+                    <div class="">
+                        {{ form.content|add_class:"modifier" }}
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Post</button>
                     </div>
                 </form>
 
-                <button type="submit" class="btn btn-primary" form="postForm">Post</button>
             </div>
 
         </div>

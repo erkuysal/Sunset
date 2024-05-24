@@ -122,30 +122,82 @@
 
 {% block jscript %}
 <script>
- document.addEventListener('DOMContentLoaded', () => {
-        const openModalBtn = document.getElementById('openModalBtn');
-        const modalContainer = document.getElementById('modalContainer');
+document.addEventListener('DOMContentLoaded', () => {
+    const openModalBtn = document.getElementById('openModalBtn');
+    const modalContainer = document.getElementById('modalContainer');
 
-        openModalBtn.onclick = async () => {
-            try {
-                const response = await fetch('{% url 'post' %}');
-                const modalHtml = await response.text();
-                modalContainer.innerHTML = modalHtml;
-                const modalElement = new bootstrap.Modal(document.getElementById('composePostModal'));
-                modalElement.show();
+    openModalBtn.onclick = async () => {
+        try {
+            const response = await fetch('{% url 'create_post' %}');
+            if (!response.ok) throw new Error('Network response was not ok');
+            const modalHtml = await response.text();
+            modalContainer.innerHTML = modalHtml;
+            const modalElement = new bootstrap.Modal(document.getElementById('composePostModal'));
+            modalElement.show();
 
-                // Add event listener for closing the modal when clicking outside
-                document.addEventListener('click', (event) => {
-                    const modalContent = document.querySelector('.modal-content');
-                    if (modalElement._isShown && !modalContent.contains(event.target)) {
-                        modalElement.hide();
-                    }
-                });
-            } catch (error) {
-                console.error('Error loading modal content:', error);
+            // Add event listener for closing the modal when clicking outside
+            document.addEventListener('click', (event) => {
+                const modalContent = document.querySelector('.modal-content');
+                if (modalElement._isShown && !modalContent.contains(event.target)) {
+                    modalElement.hide();
+                }
+            });
+
+            // Add event listener for form submission after modal content is loaded
+            document.getElementById('postForm').addEventListener('submit', submitForm);
+
+        } catch (error) {
+            console.error('Error loading modal content:', error);
+        }
+    };
+});
+
+async function submitForm(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const csrftoken = getCookie('csrftoken');
+
+    try {
+        const response = await fetch('{% url 'create_post' %}', {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': csrftoken
+            },
+            body: formData
+        });
+
+        if (response.ok) {
+            const data = await response.text();
+            alert('Post created successfully!');
+            const modalElement = bootstrap.Modal.getInstance(document.getElementById('composePostModal'));
+            modalElement.hide();
+            // Optionally update the feed without a page reload
+        } else {                                                    // remove in production
+            const errorData = await response.text();
+            alert('Error: ' + errorData.message);
+        }
+    } catch (error) {                                               // remove in production
+        alert('An error occurred: ' + error.message);
+        console.error('Error details:', error);
+    }
+}
+
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
             }
-        };
-    });
+        }
+    }
+    return cookieValue;
+}
+
 </script>
 {% endblock %}
 

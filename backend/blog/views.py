@@ -21,6 +21,8 @@ def create_post(request):
             post.author = request.user
             post.save()
             return redirect('feed')
+        else:
+            print(form.errors)  # Add this line to see validation errors
     else:
         form = PostForm()
     return render(request, 'blog/post.html', {'form': form})
