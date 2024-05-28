@@ -75,8 +75,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                # ----------------- LINK PROCESSORS -----------------
+                # ----------------- CUSTOM PROCESSORS -----------------
                 'backend.utilities.context_processors.register_nav_links',
+                'backend.utilities.context_processors.debug_mode',
             ],
         },
     },

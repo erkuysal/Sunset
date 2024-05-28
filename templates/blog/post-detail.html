@@ -1,4 +1,5 @@
 {% extends 'template-Wnav.html' %}
+{% load custom_filters %}
 
 {% block head %}
 <style>
@@ -10,26 +11,111 @@
             font-stretch: semi-expanded;
             color: #ffe6a8;
         }
+
+        .space-top{
+            margin-top: 3rem;
+        }
+
+        .modifier{
+            border: none;
+            resize: none;
+        }
+
+        .form-control{
+            background-color: rgb(41,41,41);
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus,
+        button:focus {
+            outline: none;
+        }
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="container font-3bit mt-5">
-    <h2>{{ post.author.username }}</h2>
-    <p>{{ post.content }}</p>
-    <h3>Comments</h3>
-    {% for comment in post.comments.all %}
-        <div>
-            <h4>{{ comment.author.username }}</h4>
-            <p>{{ comment.content }}</p>
+    <div class="container-fluid full-height content-container font-8bit">
+        <div class="row full-height mt-3">
+
+            <div class="col-md-3 fixed-column d-none d-md-block text-center">
+                <!-- Fixed left sidebar content here -->
+                <div>
+                    <h2>Welcome, {{ user.username }}!</h2>
+                        <button  id="openModalBtn" type="button" class="btn btn-primary" data-bs-toggle="modal" >
+                             < Post >
+                        </button>
+                </div>
+
+
+
+            </div>
+
+            <div class="col-md-6 scrollable-content">
+                <!-- Scrollable middle content here -->
+                <div class="container">
+
+                        <div class="container font-3bit space-top">
+                            <div class="post">
+                                <div class="post-box border-bottom scroll-area my-3 ">
+                                        <div class="d-flex w-100 align-items-center justify-content-between mb-2">
+                                            <small> < {{ post.author.username }} > </small>
+                                            <small>{{ post.created_at }}</small>
+                                        </div>
+
+                                        <div class="col-10 mb-1 small mx-3">
+                                            <p>{{ post.content }}</p>
+                                        </div>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <small>Comments</small>
+                            </div>
+
+                            <div class="">
+                                <form method="post" class="modifier">
+                                    {% csrf_token %}
+                                    {{ form.content}}
+                                    <button type="submit" class="">Reply</button>
+                                </form>
+                            </div>
+
+                            <div class="comments-container row mt-3">
+                                {% for comment in post.comments.all %}
+                                    <div class="post">
+                                        <div class="post-box border-bottom scroll-area my-3 ">
+                                                <div class="d-flex w-100 align-items-center justify-content-between mb-2">
+                                                    <small> < {{ comment.author.username }} > </small>
+                                                    <small>{{ comment.created_at }}</small>
+                                                </div>
+
+                                                <div class="col-10 mb-1 small mx-3">
+                                                    <p>{{ comment.content }}</p>
+                                                </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+                    <!-- Repeat .post for multiple posts -->
+
+                    <div id="modalContainer"></div>
+                </div>
+            </div>
+
+            <div class="col-md-3 fixed-column d-none d-md-block">
+                <!-- Fixed right sidebar content here -->
+                <div>
+                    <p>Right Sidebar</p>
+                    <p>More content...</p>
+                    <p>More content...</p>
+                </div>
+            </div>
+
         </div>
-    {% endfor %}
-    <h3>Add a Comment</h3>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Add Comment</button>
-    </form>
-</div>
+    </div>
 
 {% endblock %}
+

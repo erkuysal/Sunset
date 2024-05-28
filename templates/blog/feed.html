@@ -127,28 +127,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalContainer = document.getElementById('modalContainer');
 
     openModalBtn.onclick = async () => {
-        try {
-            const response = await fetch('{% url 'create_post' %}');
-            if (!response.ok) throw new Error('Network response was not ok');
-            const modalHtml = await response.text();
-            modalContainer.innerHTML = modalHtml;
-            const modalElement = new bootstrap.Modal(document.getElementById('composePostModal'));
-            modalElement.show();
+        const response = await fetch('{% url 'create_post' %}');
+        if (!response.ok) throw new Error('Network response was not ok');
+        const modalHtml = await response.text();
+        modalContainer.innerHTML = modalHtml;
+        const modalElement = new bootstrap.Modal(document.getElementById('composePostModal'));
+        modalElement.show();
 
-            // Add event listener for closing the modal when clicking outside
-            document.addEventListener('click', (event) => {
-                const modalContent = document.querySelector('.modal-content');
-                if (modalElement._isShown && !modalContent.contains(event.target)) {
-                    modalElement.hide();
-                }
-            });
+        // Add event listener for closing the modal when clicking outside
+        document.addEventListener('click', (event) => {
+            const modalContent = document.querySelector('.modal-content');
+            if (modalElement._isShown && !modalContent.contains(event.target)) {
+                modalElement.hide();
+            }
+        });
 
-            // Add event listener for form submission after modal content is loaded
-            document.getElementById('postForm').addEventListener('submit', submitForm);
-
-        } catch (error) {
-            console.error('Error loading modal content:', error);
-        }
+        // Add event listener for form submission after modal content is loaded
+        document.getElementById('postForm').addEventListener('submit', submitForm);
     };
 });
 
@@ -166,20 +161,11 @@ async function submitForm(event) {
             body: formData
         });
 
-        if (response.ok) {
-            const data = await response.text();
-            alert('Post created successfully!');
+        } finally {
+            // Close the modal after sending the post
             const modalElement = bootstrap.Modal.getInstance(document.getElementById('composePostModal'));
             modalElement.hide();
-            // Optionally update the feed without a page reload
-        } else {                                                    // remove in production
-            const errorData = await response.text();
-            alert('Error: ' + errorData.message);
         }
-    } catch (error) {                                               // remove in production
-        alert('An error occurred: ' + error.message);
-        console.error('Error details:', error);
-    }
 }
 
 

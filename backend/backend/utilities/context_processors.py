@@ -1,3 +1,12 @@
+from django.conf import settings
+
+
+def debug_mode(request):
+    return {
+        'DEBUG': settings.DEBUG
+    }
+
+
 def register_nav_links(request):
     nav_links = [
     ]

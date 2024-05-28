@@ -45,4 +45,7 @@
 
 
 {% block jscript %}
+    <script>
+        const isDebug = {{ DEBUG|yesno:"true,false"}};
+    </script>
 {% endblock %}

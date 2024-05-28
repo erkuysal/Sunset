@@ -13,7 +13,7 @@ def sign_up(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'User registered successfully.')
-            return redirect('sign_in')  # Change 'login' to the name of your login URL
+            return redirect('sign-in')  # Change 'login' to the name of your login URL
     else:
         form = CustomUserForm()
 
