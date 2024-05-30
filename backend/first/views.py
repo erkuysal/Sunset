@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 
 from .forms import CustomUserForm, SignInForm
+from .models import CustomUser, Follow
 # Create your views here.
 
 
@@ -48,3 +49,23 @@ def profile(request):
     return render(request, 'register/profile.html', {'title': 'Profile'})
 
 
+def view_profile(request, username):
+    user = get_object_or_404(CustomUser, username=username)
+    return render(request, 'register/view-profile.html', {'user': user})
+
+
+# ////////////////////// -------------------- TEST ZONE ------------------- //////////////////////
+
+@login_required
+def follow_user(request, username):
+    user_to_follow = get_object_or_404(CustomUser, username=username)
+    if request.user != user_to_follow:
+        Follow.objects.get_or_create(follower_user=request.user, following_user=user_to_follow)
+    return redirect('view-profile', username=username)
+
+
+@login_required
+def unfollow_user(request, username):
+    user_to_unfollow = get_object_or_404(CustomUser, username=username)
+    Follow.objects.filter(follower_user=request.user, following_user=user_to_unfollow).delete()
+    return redirect('view-profile', username=username)

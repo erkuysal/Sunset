@@ -19,6 +19,12 @@
 
             <div class="col-4 text-center" style="background-color: #2b542c" id="user-contact">
 
+                {% if user != request.user %}
+                        <a href="{% url 'unfollow_user' user.username %}">Unfollow</a>
+                        <a href="{% url 'follow_user' user.username %}">Follow</a>
+                {% endif %}
+
+
                 <div class="follow">
                     <h2>Followers ({{ user.followers.count }})</h2>
                     <ul>

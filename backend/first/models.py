@@ -62,3 +62,8 @@ class Follow(models.Model):
 
     class Meta:
         unique_together = ('follower_user', 'following_user')
+
+    def __str__(self):
+        return f'{self.follower_user} follows {self.following_user}'
+
+
