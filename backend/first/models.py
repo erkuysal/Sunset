@@ -47,10 +47,18 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     bio = models.TextField(blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
 #   profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True)
-    followers = models.ManyToManyField('self', symmetrical=False, related_name='following')
+    user_followers = models.ManyToManyField('self', symmetrical=False, related_name='follow')
 
     objects = CustomUserManager()
 
     def __str__(self):
         return self.username
 
+
+class Follow(models.Model):
+    follower_user = models.ForeignKey(CustomUser, related_name='following', on_delete=models.CASCADE)
+    following_user = models.ForeignKey(CustomUser, related_name='followers', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('follower_user', 'following_user')
