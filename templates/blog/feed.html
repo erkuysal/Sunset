@@ -94,7 +94,16 @@
                                     </div>
 
                                     <div class="d-flex w-100 justify-content-between">
+
                                         <small>{{ post.author.username }}</small>
+
+                                        <button id="follow-button" data-username="{{ user_profile.user.username }}">
+                                            {% if request.user in user_profile.user.followers.all %}
+                                                Unfollow
+                                            {% else %}
+                                                Follow
+                                            {% endif %}
+                                        </button>
                                     </div>
 
                                 </a>
