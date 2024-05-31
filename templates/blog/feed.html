@@ -25,8 +25,8 @@
             {#background-color: #f9f9f9;#}
             margin-bottom: 1rem;
             padding: 1rem;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: 1px 5px 1px 5px rgb(255, 226, 127);
         }
 
         .post-box{
@@ -51,6 +51,11 @@
             width: 100%;
             color: var(--bs-list-group-action-color);
             text-align: inherit;
+        }
+
+        .link-modifier{
+            color: white;
+            text-decoration: none;
         }
     </style>
 {% endblock %}
@@ -77,15 +82,13 @@
                 <!-- Scrollable middle content here -->
                 <div class="container">
 
-
-
-                    <div class="post">
+                    <div class="post font-3bit">
                         <!-- Post content here -->
                         {% for post in posts %}
                             <div class="post-box border-bottom scroll-area my-3">
                                 <a href="{% url 'post_detail' post.id %}" class="list-group-item list-group-item-action active py-4 lh-sm" aria-current="true">
                                     <div class="d-flex w-100 align-items-center justify-content-between mb-2">
-                                        <h4><strong class="mb-1">[POST HEADER]</strong></h4>
+                                        <span></span>
                                         <small>{{ post.created_at }}</small>
                                     </div>
 
@@ -94,16 +97,11 @@
                                     </div>
 
                                     <div class="d-flex w-100 justify-content-between">
-
-                                        <small>{{ post.author.username }}</small>
-
-                                        <button id="follow-button" data-username="{{ user_profile.user.username }}">
-                                            {% if request.user in user_profile.user.followers.all %}
-                                                Unfollow
-                                            {% else %}
-                                                Follow
-                                            {% endif %}
-                                        </button>
+                                        <small>
+                                            <a class="link-modifier"
+                                                    href="{% url 'view-profile' post.author.username %}">
+                                                {{ post.author.username }}</a>
+                                        </small>
                                     </div>
 
                                 </a>

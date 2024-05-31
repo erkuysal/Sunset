@@ -4,7 +4,7 @@
 {% block content %}
     <div class="container mt-5 font-8bit">
         <div class="row mb-3">
-            <h1 class="d-block" id="username">// {{ user.username }}</h1>
+            <h1 class="d-block text-center" id="username"> < {{ user.username }} > </h1>
 
             <h3 style="background-color: white; display: block" id="about-me">[ABOUT ME]</h3>
 
@@ -20,8 +20,11 @@
             <div class="col-4 text-center" style="background-color: #2b542c" id="user-contact">
 
                 {% if user != request.user %}
+                     {% if is_following %}
                         <a href="{% url 'unfollow_user' user.username %}">Unfollow</a>
+                    {% else %}
                         <a href="{% url 'follow_user' user.username %}">Follow</a>
+                    {% endif %}
                 {% endif %}
 
 
