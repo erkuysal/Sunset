@@ -21,18 +21,7 @@
 
                 <div class="follow">
                     <h2>Followers ({{ user.followers.count }})</h2>
-                    <ul>
-                        {% for follower in user.followers.all %}
-                            <li>{{ follower.follower.username }}</li>
-                        {% endfor %}
-                    </ul>
-
                     <h2>Following ({{ user.following.count }})</h2>
-                    <ul>
-                        {% for following in user.following.all %}
-                            <li>{{ following.following.username }}</li>
-                        {% endfor %}
-                    </ul>
                 </div>
 
             </div>

@@ -1,10 +1,52 @@
 {% extends 'template-Wnav.html' %}
 
+{% block head %}
+<style>
+    .follow-lm{
+        color: white;
+        text-decoration: none;
+    }
+</style>
+{% endblock %}
 
 {% block content %}
     <div class="container mt-5 font-8bit">
         <div class="row mb-3">
             <h1 class="d-block text-center" id="username"> < {{ user.username }} > </h1>
+
+            <div class="row text-center">
+
+                <div class="row" style="padding-left: 3.5rem">
+                    <div class="col-4"></div>
+
+                    <div class="col-4 m-auto">
+                        {% if user != request.user %}
+                            <button class="btn btn-outline-success">
+                             {% if is_following %}
+                                <a class="follow-lm" href="{% url 'unfollow_user' user.username %}">Unfollow</a>
+                            {% else %}
+                                <a class="follow-lm" href="{% url 'follow_user' user.username %}">Follow</a>
+                            {% endif %}
+                            </button>
+                        {% endif %}
+                    </div>
+
+                    <div class="col-4"></div>
+                </div>
+
+                 <div class="follow">
+                     <div class="row">
+                         <div class="col-6">
+                            <h2>Followers ({{ user.followers.count }})</h2>
+                         </div>
+
+                        <div class="col-6">
+                            <h2>Following ({{ user.following.count }})</h2>
+                        </div>
+                     </div>
+                 </div>
+
+            </div>
 
             <h3 style="background-color: white; display: block" id="about-me">[ABOUT ME]</h3>
 
@@ -19,30 +61,6 @@
 
             <div class="col-4 text-center" style="background-color: #2b542c" id="user-contact">
 
-                {% if user != request.user %}
-                     {% if is_following %}
-                        <a href="{% url 'unfollow_user' user.username %}">Unfollow</a>
-                    {% else %}
-                        <a href="{% url 'follow_user' user.username %}">Follow</a>
-                    {% endif %}
-                {% endif %}
-
-
-                <div class="follow">
-                    <h2>Followers ({{ user.followers.count }})</h2>
-                    <ul>
-                        {% for follower in user.followers.all %}
-                            <li>{{ follower.follower.username }}</li>
-                        {% endfor %}
-                    </ul>
-
-                    <h2>Following ({{ user.following.count }})</h2>
-                    <ul>
-                        {% for following in user.following.all %}
-                            <li>{{ following.following.username }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
 
             </div>
         </div>
