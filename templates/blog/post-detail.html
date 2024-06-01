@@ -1,8 +1,28 @@
 {% extends 'template-Wnav.html' %}
-{% load custom_filters %}
 
 {% block head %}
-<style>
+    <style>
+        .full-height {
+            height: 100%;
+        }
+
+        .content-container {
+            margin-top: 56px; /* Height of the navbar */
+        }
+        .scrollable-content {
+            overflow-y: auto;
+            height: 100%;
+        }
+
+        .fixed-column {
+            height: 100%;
+            position: sticky;
+            top: 56px; /* Height of the navbar */
+            overflow: auto;
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+
         .font-3bit {
             font-family: lores-9-plus-wide, sans-serif;
             font-weight: 400;
@@ -13,12 +33,17 @@
         }
 
         .space-top{
-            margin-top: 3rem;
+            margin-top: 2rem;
         }
 
         .modifier{
             border: none;
             resize: none;
+        }
+
+        .scrollable-content {
+            overflow-y: auto;
+            height: 100%;
         }
 
         .form-control{
@@ -31,12 +56,29 @@
         button:focus {
             outline: none;
         }
-</style>
+
+        .comment-bm{
+            background-color: gray;
+        }
+
+        .post-bm{
+            border: 5px solid #000000;
+            padding: 0.5rem;
+            border-radius: 8px 8px;
+            box-shadow: -4px -4px 0px 0px #FFE27FFF;
+        }
+
+        .feed-link-modifier{
+            color: white;
+            text-decoration: none;
+        }
+    </style>
 {% endblock %}
+
 
 {% block content %}
     <div class="container-fluid full-height content-container font-8bit">
-        <div class="row full-height mt-3">
+        <div class="row full-height">
 
             <div class="col-md-3 fixed-column d-none d-md-block text-center">
                 <!-- Fixed left sidebar content here -->
@@ -46,59 +88,86 @@
                              < Post >
                         </button>
                 </div>
-
-
-
             </div>
 
             <div class="col-md-6 scrollable-content">
                 <!-- Scrollable middle content here -->
                 <div class="container">
 
-                        <div class="container font-3bit space-top">
-                            <div class="post">
-                                <div class="post-box border-bottom scroll-area my-3 ">
+                <div class="content-container">
+
+                    <div class="post-bm font-3bit">
+                            <div class="my-3 ">
+
+                                <div class="d-flex w-100 align-items-center justify-content-between mb-2">
+                                    <small> < {{ post.author.username }} > </small>
+                                    <small>{{ post.created_at }}</small>
+                                </div>
+
+                                <div class="col-10 mb-1 small mx-3">
+                                    <p>{{ post.content }}</p>
+                                </div>
+
+                                <hr>
+
+                                 <div class="d-flex w-100 justify-content-center">
+
+                                        <small>
+                                            <a class="feed-link-modifier  px-1 mx-2"
+                                               href="#"> o </a>
+                                        </small>
+
+                                        <span class="mx-5"></span>
+
+                                        <small>
+                                            <a class="feed-link-modifier px-1 mx-2"
+                                               href="#"> x </a>
+                                        </small>
+
+                                        <span class="mx-5"></span>
+
+                                        <small>
+                                            <a class="feed-link-modifier px-1 mx-2"
+                                               href="#"> + </a>
+                                        </small>
+                                 </div>
+
+                            </div>
+                        </div>
+
+                    <div class="mt-2">
+                        <form method="post" class="font-3bit">
+                            {% csrf_token %}
+                            {{ form.content}}
+                            <button type="submit" class="mt-1">Reply</button>
+                        </form>
+                    </div>
+
+                    <div class="text-center my-2">
+                                <hr>
+                                <small>Comments</small>
+                                <hr>
+                            </div>
+
+                </div>
+
+                    <div class="post font-3bit">
+                        <!-- Post content here -->
+                        {% for comment in post.comments.all %}
+                                <div class="scroll-area">
+                                    <div class="comment-bm border-bottom my-3 ">
                                         <div class="d-flex w-100 align-items-center justify-content-between mb-2">
-                                            <small> < {{ post.author.username }} > </small>
-                                            <small>{{ post.created_at }}</small>
+                                            <small> < {{ comment.author.username }} > </small>
+                                            <small>{{ comment.created_at }}</small>
                                         </div>
 
                                         <div class="col-10 mb-1 small mx-3">
-                                            <p>{{ post.content }}</p>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div class="text-center">
-                                <small>Comments</small>
-                            </div>
-
-                            <div class="">
-                                <form method="post" class="modifier">
-                                    {% csrf_token %}
-                                    {{ form.content}}
-                                    <button type="submit" class="">Reply</button>
-                                </form>
-                            </div>
-
-                            <div class="comments-container row mt-3">
-                                {% for comment in post.comments.all %}
-                                    <div class="post">
-                                        <div class="post-box border-bottom scroll-area my-3 ">
-                                                <div class="d-flex w-100 align-items-center justify-content-between mb-2">
-                                                    <small> < {{ comment.author.username }} > </small>
-                                                    <small>{{ comment.created_at }}</small>
-                                                </div>
-
-                                                <div class="col-10 mb-1 small mx-3">
-                                                    <p>{{ comment.content }}</p>
-                                                </div>
+                                            <p> - {{ comment.content }}</p>
                                         </div>
                                     </div>
-                                {% endfor %}
-                            </div>
-
-                        </div>
+                                </div>
+                            {% endfor %}
+                    </div>
                     <!-- Repeat .post for multiple posts -->
 
                     <div id="modalContainer"></div>
@@ -116,6 +185,72 @@
 
         </div>
     </div>
+{% endblock %}
 
+{% block jscript %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const openModalBtn = document.getElementById('openModalBtn');
+    const modalContainer = document.getElementById('modalContainer');
+
+    openModalBtn.onclick = async () => {
+        const response = await fetch('{% url 'create_post' %}');
+        if (!response.ok) throw new Error('Network response was not ok');
+        const modalHtml = await response.text();
+        modalContainer.innerHTML = modalHtml;
+        const modalElement = new bootstrap.Modal(document.getElementById('composePostModal'));
+        modalElement.show();
+
+        // Add event listener for closing the modal when clicking outside
+        document.addEventListener('click', (event) => {
+            const modalContent = document.querySelector('.modal-content');
+            if (modalElement._isShown && !modalContent.contains(event.target)) {
+                modalElement.hide();
+            }
+        });
+
+        // Add event listener for form submission after modal content is loaded
+        document.getElementById('postForm').addEventListener('submit', submitForm);
+    };
+});
+
+async function submitForm(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const csrftoken = getCookie('csrftoken');
+
+    try {
+        const response = await fetch('{% url 'create_post' %}', {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': csrftoken
+            },
+            body: formData
+        });
+
+        } finally {
+            // Close the modal after sending the post
+            const modalElement = bootstrap.Modal.getInstance(document.getElementById('composePostModal'));
+            modalElement.hide();
+        }
+}
+
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+</script>
 {% endblock %}
 
