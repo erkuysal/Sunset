@@ -68,10 +68,7 @@
             <div class="col-md-3 fixed-column d-none d-md-block text-center">
                 <!-- Fixed left sidebar content here -->
                 <div>
-                    <h2>Welcome, {{ user.username }}!</h2>
-                        <button  id="openModalBtn" type="button" class="btn btn-primary" data-bs-toggle="modal" >
-                             < Post >
-                        </button>
+                    {% include 'blog/components/left-sidebar.html' %}
                 </div>
             </div>
 
@@ -134,9 +131,7 @@
             <div class="col-md-3 fixed-column d-none d-md-block">
                 <!-- Fixed right sidebar content here -->
                 <div>
-                    <p>Right Sidebar</p>
-                    <p>More content...</p>
-                    <p>More content...</p>
+                    {% include 'blog/components/right-sidebar.html' %}
                 </div>
             </div>
 
@@ -164,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (modalElement._isShown && !modalContent.contains(event.target)) {
                 modalElement.hide();
             }
-        });
+        })
 
         // Add event listener for form submission after modal content is loaded
         document.getElementById('postForm').addEventListener('submit', submitForm);
