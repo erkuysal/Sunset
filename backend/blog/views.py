@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 
 # Create your views here.
-from .models import Post, Comment
+from .models import Post, Like
 from .forms import PostForm, CommentForm
 
 
@@ -44,5 +44,11 @@ def post_detail(request, post_id):
     return render(request, 'blog/post-detail.html', {'post': post, 'form': form})
 
 
-def comment():
-    pass
+@login_required
+def like_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    like, created = Like.objects.get_or_create(user=request.user, post=post)
+    if not created:
+        like.delete()
+    return redirect(request.META.get('HTTP_REFERER', 'post_list'))
+

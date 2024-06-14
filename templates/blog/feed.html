@@ -92,7 +92,7 @@
 
 
                                     <div class="d-flex w-100">
-
+                                        {% if user.is_authenticated %}
                                         <span class="actions justify-content-start">
                                             <small>
                                                 <a class="feed-link-modifier  px-1 mx-2"
@@ -105,10 +105,10 @@
                                             </small>
 
                                             <small>
-                                                <a class="feed-link-modifier px-1 mx-2"
-                                                        href="#"> + </a>
+                                                {% include 'blog/components/like.html' %}
                                             </small>
                                         </span>
+                                        {% endif %}
 
                                         <span class="mx-auto"></span>
 
@@ -116,6 +116,10 @@
                                             <a class="feed-link-modifier px-3"
                                                     href="{% url 'view-profile' post.author.username %}">
                                                 {{ post.author.username }}</a>
+                                        </small>
+
+                                        <small class="px-1 mx-2">
+                                            {{ post.total_likes }} likes
                                         </small>
                                     </div>
                                 </a>

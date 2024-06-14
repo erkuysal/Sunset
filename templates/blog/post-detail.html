@@ -61,14 +61,14 @@
             border: 5px solid #000000;
             padding: 0.5rem;
             border-radius: 8px 8px;
-            box-shadow: -4px -4px 0px 0px green;
+            box-shadow: -4px -4px 1px 0px green;
         }
 
         .post-bm{
             border: 5px solid #000000;
             padding: 0.5rem;
             border-radius: 8px 8px;
-            box-shadow: -4px -4px 0px 0px #FFE27FFF;
+            box-shadow: 0px 0px 0px 3px #FFE27FFF;
         }
 
         .feed-link-modifier{
@@ -86,10 +86,7 @@
             <div class="col-md-3 fixed-column d-none d-md-block text-center">
                 <!-- Fixed left sidebar content here -->
                 <div>
-                    <h2>Welcome, {{ user.username }}!</h2>
-                    <button  id="openModalBtn" type="button" class="btn btn-primary" data-bs-toggle="modal" >
-                         < Post >
-                    </button>
+                    {% include 'blog/components/left-sidebar.html' %}
                 </div>
             </div>
 
@@ -190,9 +187,7 @@
             <div class="col-md-3 fixed-column d-none d-md-block">
                 <!-- Fixed right sidebar content here -->
                 <div>
-                    <p>Right Sidebar</p>
-                    <p>More content...</p>
-                    <p>More content...</p>
+                    {% include 'blog/components/right-sidebar.html' %}
                 </div>
             </div>
 

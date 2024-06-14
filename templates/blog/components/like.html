@@ -1,0 +1,13 @@
+{% load static %}
+
+<div>
+    {% if user in post.likes.all %}
+        <small>
+            <a class="feed-link-modifier px-1 mx-2" href="{% url 'like_post' post.id %}"> - </a>
+        </small>
+    {% else %}
+        <small>
+            <a class="feed-link-modifier px-1 mx-2" href="{% url 'like_post' post.id %}"> + </a>
+        </small>
+    {% endif %}
+</div>
