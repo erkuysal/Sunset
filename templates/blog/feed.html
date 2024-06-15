@@ -92,23 +92,7 @@
 
 
                                     <div class="d-flex w-100">
-                                        {% if user.is_authenticated %}
-                                        <span class="actions justify-content-start">
-                                            <small>
-                                                <a class="feed-link-modifier  px-1 mx-2"
-                                                        href="#"> o </a>
-                                            </small>
-
-                                            <small>
-                                                <a class="feed-link-modifier px-1 mx-2"
-                                                        href="#"> x </a>
-                                            </small>
-
-                                            <small>
-                                                {% include 'blog/components/like.html' %}
-                                            </small>
-                                        </span>
-                                        {% endif %}
+                                        {% include 'blog/components/actions.html' %}
 
                                         <span class="mx-auto"></span>
 

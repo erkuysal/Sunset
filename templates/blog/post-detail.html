@@ -107,11 +107,19 @@
                                         {{ post.author.username }}
                                         </a> >
                                     </small>
+
                                     <small>{{ post.created_at }}</small>
+
                                 </div>
 
-                                <div class="col-10 mb-1 small mx-3">
-                                    <p>{{ post.content }}</p>
+                                <div class="d-flex w-100 justify-content-between mb-2">
+                                    <div class="col-10 mb-1 small mx-3">
+                                        <p> >> {{ post.content }}</p>
+                                    </div>
+
+                                     <small class="px-1 mx-auto small">
+                                        {{ post.total_likes }} likes
+                                    </small>
                                 </div>
 
                                 <hr>
@@ -172,7 +180,7 @@
                                         </div>
 
                                         <div class="col-10 mb-1 small mx-3">
-                                            <p> - {{ comment.content }}</p>
+                                            <p> // {{ comment.content }}</p>
                                         </div>
                                     </div>
                                 </div>
