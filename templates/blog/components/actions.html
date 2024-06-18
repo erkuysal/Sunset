@@ -1,5 +1,15 @@
 {% load static %}
 
+{% block head %}
+<style>
+    .btn-modifier{
+        border: 1px solid #ffffff;
+        border-radius: 50%;
+        background: -webkit-linear-gradient(#ff0000, #ffe31a);
+    }
+</style>
+{% endblock %}
+
 {% if user.is_authenticated %}
 <span class="actions justify-content-start">
     <small>
@@ -15,13 +25,23 @@
     <small>
         {% if user in post.likes.all %}
             <small>
-                <a class="feed-link-modifier px-1 mx-2" href="{% url 'like_post' post.id %}"> - </a>
+                <button class="btn-modifier px-1 mx-2">
+                    -
+                </button>
             </small>
         {% else %}
             <small>
-                <a class="feed-link-modifier px-1 mx-2" href="{% url 'like_post' post.id %}"> + </a>
+                <button class="btn-modifier px-1 mx-2">
+                    +
+                </button>
             </small>
         {% endif %}
     </small>
 </span>
 {% endif %}
+
+{% block jscript %}
+<script>
+
+</script>
+{% endblock %}
