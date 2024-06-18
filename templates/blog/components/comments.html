@@ -1,0 +1,18 @@
+{% for comment in post.comments.all %}
+    <div class="scroll-area">
+        <div class="comment-bm my-3 ">
+            <div class="d-flex w-100 align-items-center justify-content-between mb-2">
+                <small>
+                    < <a class="feed-link-modifier"
+                    href="{% url 'view-profile' comment.author.username %}">
+                    {{ comment.author.username }}</a> >
+                </small>
+                <small>{{ comment.created_at }}</small>
+            </div>
+
+            <div class="col-10 mb-1 small mx-3">
+                <p> // {{ comment.content }}</p>
+            </div>
+        </div>
+    </div>
+{% endfor %}

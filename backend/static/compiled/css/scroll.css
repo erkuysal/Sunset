@@ -1,0 +1,73 @@
+ .full-height {
+    height: 100%;
+}
+
+.content-container {
+    margin-top: 56px; /* Height of the navbar */
+}
+.scrollable-content {
+    overflow-y: auto;
+    height: 100%;
+}
+
+.fixed-column {
+    height: 100%;
+    position: sticky;
+    top: 56px; /* Height of the navbar */
+    overflow: auto;
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+.font-3bit {
+    font-family: lores-9-plus-wide, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: large;
+    font-stretch: semi-expanded;
+    color: #ffe6a8;
+}
+
+.space-top{
+    margin-top: 2rem;
+}
+
+.modifier{
+    border: none;
+    resize: none;
+}
+
+.scrollable-content {
+    overflow-y: auto;
+    height: 100%;
+}
+
+.form-control{
+    background-color: rgb(41,41,41);
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+.comment-bm{
+    border: 5px solid #000000;
+    padding: 0.5rem;
+    border-radius: 8px 8px;
+    box-shadow: -4px -4px 1px 0px green;
+}
+
+.post-bm{
+    border: 5px solid #000000;
+    padding: 0.5rem;
+    border-radius: 8px 8px;
+    box-shadow: 0px 0px 0px 3px #FFE27FFF;
+}
+
+.feed-link-modifier{
+    color: white;
+    text-decoration: none;
+}

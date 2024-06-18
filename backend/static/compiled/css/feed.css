@@ -1,0 +1,54 @@
+.full-height {
+    height: 100%;
+}
+
+.content-container {
+    margin-top: 56px; /* Height of the navbar */
+}
+.scrollable-content {
+    overflow-y: auto;
+    height: 100%;
+}
+
+.fixed-column {
+    height: 100%;
+    position: sticky;
+    top: 56px; /* Height of the navbar */
+    overflow: auto;
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+.post {
+    margin-bottom: 1rem;
+    padding: 1rem;
+}
+
+.post-box{
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+    border-radius: 8px;
+    box-shadow: 1px 5px 1px 5px rgb(255, 226, 127);
+}
+
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: var(--bs-list-group-item-padding-y) var(--bs-list-group-item-padding-x);
+    color: var(--bs-list-group-color);
+    text-decoration: none;
+    /* background-color: var(--bs-list-group-bg); */
+    border: var(--bs-list-group-border-width) solid var(--bs-list-group-border-color);
+}
+
+.list-group-item-action {
+    width: 100%;
+    color: var(--bs-list-group-action-color);
+    text-align: inherit;
+}
+
+.feed-link-modifier{
+    color: white;
+    text-decoration: none;
+}

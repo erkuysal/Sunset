@@ -23,7 +23,7 @@
     </small>
 
     <small>
-        <button id="like-btn-{{ post.id }}" class="btn-modifier px-1 mx-2" data-post-id="{{ post.id }}">
+        <button id="like-btn-{{ post.id }}" class="btn-modifier px-1 mx-2">
             {% if user in post.likes.all %}
                 -
             {% else %}
