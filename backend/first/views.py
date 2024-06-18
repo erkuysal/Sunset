@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
+from django.http import JsonResponse
 
 from .forms import CustomUserForm, SignInForm
 from .models import CustomUser, Follow
@@ -60,13 +61,23 @@ def view_profile(request, username):
 @login_required
 def follow_user(request, username):
     user_to_follow = get_object_or_404(CustomUser, username=username)
-    if request.user != user_to_follow:
-        Follow.objects.get_or_create(follower_user=request.user, following_user=user_to_follow)
-    return redirect('view-profile', username=username)
+    follow, created = Follow.objects.get_or_create(
+        follower_user=request.user,
+        following_user=user_to_follow
+    )
+    if created:
+        return JsonResponse({'status': 'followed'})
+    return JsonResponse({'status': 'already followed'})
 
 
 @login_required
 def unfollow_user(request, username):
     user_to_unfollow = get_object_or_404(CustomUser, username=username)
-    Follow.objects.filter(follower_user=request.user, following_user=user_to_unfollow).delete()
-    return redirect('view-profile', username=username)
+    follow = Follow.objects.filter(
+        follower_user=request.user,
+        following_user=user_to_unfollow
+    ).first()
+    if follow:
+        follow.delete()
+        return JsonResponse({'status': 'unfollowed'})
+    return JsonResponse({'status': 'not followed'})

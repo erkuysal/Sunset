@@ -20,15 +20,7 @@
                     <div class="col-4"></div>
 
                     <div class="col-4 m-auto">
-                        {% if user != request.user %}
-                            <button class="btn btn-outline-success">
-                             {% if is_following %}
-                                <a class="follow-lm" href="{% url 'unfollow_user' user.username %}">Unfollow</a>
-                            {% else %}
-                                <a class="follow-lm" href="{% url 'follow_user' user.username %}">Follow</a>
-                            {% endif %}
-                            </button>
-                        {% endif %}
+                        {% include 'register/components/follow.html' %}
                     </div>
 
                     <div class="col-4"></div>
