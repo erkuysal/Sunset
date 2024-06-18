@@ -23,25 +23,66 @@
     </small>
 
     <small>
-        {% if user in post.likes.all %}
-            <small>
-                <button class="btn-modifier px-1 mx-2">
-                    -
-                </button>
-            </small>
-        {% else %}
-            <small>
-                <button class="btn-modifier px-1 mx-2">
-                    +
-                </button>
-            </small>
-        {% endif %}
+        <button id="like-btn-{{ post.id }}" class="btn-modifier px-1 mx-2" data-post-id="{{ post.id }}">
+            {% if user in post.likes.all %}
+                -
+            {% else %}
+                +
+            {% endif %}
+        </button>
     </small>
 </span>
 {% endif %}
 
 {% block jscript %}
 <script>
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('#like-btn-{{ post.id }}').forEach(button => {
+        button.addEventListener('click', async (event) => {
+            const url = `{% url 'like_post' post.id %}`;
 
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken'),
+                    },
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log(data); // Debugging line
+                    const likeButton = document.querySelector(`#like-btn-{{ post.id }}`);
+                    const likeCountSpan = document.querySelector(`#like-count-{{ post.id }}`);
+
+                    console.log(likeButton, likeCountSpan); // Debugging line
+
+                    // Check if the elements are found
+                    if (!likeButton) {
+                        console.error(`Like button not found for post ID: {{post.id}}`);
+                        return;
+                    }
+                    if (!likeCountSpan) {
+                        console.error(`Like count span not found for post ID: {{post.id}}`);
+                        return;
+                    }
+
+                    if (data.liked) {
+                        likeButton.innerText = '-';
+                    } else {
+                        likeButton.innerText = '+';
+                    }
+
+                    likeCountSpan.innerText = data.like_count + ' likes';
+                } else {
+                    console.error('Failed to like the post');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    });
+});
 </script>
 {% endblock %}
