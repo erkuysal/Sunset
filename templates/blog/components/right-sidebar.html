@@ -1,5 +1,25 @@
-<h1>
-    <a href="{% url 'likes' %}">Likes</a>
-</h1>
-<p>More content...</p>
-<p>More content...</p>
+{% load static %}
+{% block head %}
+    <style>
+    .l-modifier{
+        text-decoration: none;
+        color: black;
+    }
+    </style>
+{% endblock %}
+
+<button class="button-74">
+    <a class="l-modifier" href="{% url 'likes' %}">Likes</a>
+</button>
+
+<button class="button-74">
+    <a class="l-modifier" href="{% url 'likes' %}">Likes</a>
+</button>
+
+<button class="button-74">
+    <a class="l-modifier" href="{% url 'likes' %}">Likes</a>
+</button>
+
+<button class="button-74">
+    <a class="l-modifier" href="{% url 'likes' %}">Likes</a>
+</button>
