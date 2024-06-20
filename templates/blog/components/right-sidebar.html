@@ -8,9 +8,7 @@
     </style>
 {% endblock %}
 
-<button class="button-74">
-    <a class="l-modifier" href="{% url 'likes' %}">Likes</a>
-</button>
+{% if user.is_authenticated %}
 
 <button class="button-74">
     <a class="l-modifier" href="{% url 'likes' %}">Likes</a>
@@ -23,3 +21,24 @@
 <button class="button-74">
     <a class="l-modifier" href="{% url 'likes' %}">Likes</a>
 </button>
+
+<button class="button-74">
+    <a class="l-modifier" href="{% url 'likes' %}">Likes</a>
+</button>
+
+{% else %}
+<div class="flex-column d-flex text-center">
+    <h1>Wanna Join The Club?</h1>
+
+    <button class="button-74 mx-5">
+        <a class="l-modifier" href="{% url 'sign-up' %}">Join Us</a>
+    </button>
+
+    <h1>Forgot to Log In?</h1>
+
+    <button class="button-74 mx-5">
+        <a class="l-modifier" href="{% url 'sign-in' %}">Log In</a>
+    </button>
+</div>
+{% endif %}
+

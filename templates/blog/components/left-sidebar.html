@@ -1,4 +1,17 @@
-<h2>Welcome, {{ user.username }}!</h2>
-<button  id="openModalBtn" type="button" class="button-74" data-bs-toggle="modal" >
+{% if user.is_authenticated %}
+
+<h3>Welcome, </h3>
+<h2>
+    <a class="feed-link-modifier px-3" href="{% url 'profile' %}">{{ user.username }}</a>
+</h2>
+
+<button  id="openModalBtn" type="button" class="button-74 mt-2" data-bs-toggle="modal" >
      < Post >
 </button>
+
+{% else %}
+
+<h2>Welcome,</h2>
+    <h1>< STRANGER > </h1>
+
+{% endif %}

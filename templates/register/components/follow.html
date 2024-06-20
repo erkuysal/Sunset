@@ -1,4 +1,5 @@
-{% if user != request.user %}
+
+{% if user != request.user and user.is_authenticated %}
     {% if is_following %}
         <button id="unfollow-btn" class="button-74" data-url="{% url 'unfollow_user' user.username %}">unfollow</button>
     {% else %}

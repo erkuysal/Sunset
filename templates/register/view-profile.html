@@ -20,7 +20,11 @@
                     <div class="col-4"></div>
 
                     <div class="col-4 m-auto">
-                        {% include 'register/components/follow.html' %}
+                        {% if public_state %}
+                            <hr>
+                        {% else %}
+                            {% include 'register/components/follow.html' %}
+                        {% endif %}
                     </div>
 
                     <div class="col-4"></div>
@@ -56,6 +60,5 @@
 
             </div>
         </div>
-
     </div>
 {% endblock %}

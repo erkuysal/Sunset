@@ -1,18 +1,40 @@
- <!-- Post content here -->
+{% block head %}
+<style>
+    .arcade-box{
+        border: 2px solid #ffefc8;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .arcade-box:hover {
+      transition: all 0.13s ease-in;
+      box-shadow: -10px 10px rgba(255, 211, 118, 0.92);
+      transform: scale(1.01);
+    }
+
+    .arcade-box:active {
+      box-shadow: -10px 10px rgba(0, 0, 0, 0.92);
+      transform: translateY(4px);
+    }
+
+</style>
+{% endblock %}
+
+<!-- Post content here -->
 {% for post in posts %}
-    <div class="post-box border-bottom scroll-area my-4">
+    <div class="arcade-box scroll-area my-4">
         <a href="{% url 'post_detail' post.id %}" class="list-group-item active py-4 lh-sm" aria-current="true">
             <div class="d-flex w-100 align-items-center justify-content-between mb-2 px-3">
                 <span></span>
                 <small>{{ post.created_at }}</small>
             </div>
 
-            <div class="col-10 mb-1 small px-3">
+            <div class="col-10 small px-3">
                 <p> >> {{ post.content }}</p>
             </div>
 
-
             <div class="d-flex w-100">
+
                 {% include 'blog/components/actions.html' %}
 
                 <span class="mx-auto"></span>

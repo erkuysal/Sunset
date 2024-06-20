@@ -52,8 +52,13 @@ def profile(request):
 
 def view_profile(request, username):
     user = get_object_or_404(CustomUser, username=username)
-    is_following = Follow.objects.filter(follower_user=request.user, following_user=user).exists()
-    return render(request, 'register/view-profile.html', {'user': user, 'is_following': is_following})
+    public_state = True
+    if request.user.is_anonymous:
+        return render(request, 'register/view-profile.html', {'user': user, 'public_state': public_state})
+    else:
+        is_following = Follow.objects.filter(follower_user=request.user, following_user=user).exists()
+        public_state = False
+        return render(request, 'register/view-profile.html', {'user': user, 'is_following': is_following, 'public_state': public_state})
 
 
 # ////////////////////// -------------------- TEST ZONE ------------------- //////////////////////

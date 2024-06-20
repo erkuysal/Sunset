@@ -52,25 +52,7 @@
                                 <hr>
 
                                  <div class="d-flex w-100 justify-content-center">
-
-                                        <small>
-                                            <a class="feed-link-modifier  px-1 mx-2"
-                                               href="#"> o </a>
-                                        </small>
-
-                                        <span class="mx-5"></span>
-
-                                        <small>
-                                            <a class="feed-link-modifier px-1 mx-2"
-                                               href="#"> x </a>
-                                        </small>
-
-                                        <span class="mx-5"></span>
-
-                                        <small>
-                                            <a class="feed-link-modifier px-1 mx-2"
-                                               href="#"> + </a>
-                                        </small>
+                                     {% include 'blog/components/actions.html' %}
                                  </div>
 
                             </div>
@@ -80,7 +62,7 @@
                         <form method="post" class="font-3bit">
                             {% csrf_token %}
                             {{ form.content}}
-                            <button type="submit" class="mt-1">Reply</button>
+                            <button type="submit" class="button-74 mb-0 mt-1">Reply</button>
                         </form>
                     </div>
 
