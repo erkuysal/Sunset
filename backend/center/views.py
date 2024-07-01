@@ -5,23 +5,13 @@ from django.urls import reverse
 
 from backend.utilities.access_level import access_level_required
 
-# Create your views here.
+from first.models import CustomUser
 
 
 @login_required
 @access_level_required(5)
 def dashboard(request):
     return render(request, 'center/dashboard.html', {'title': 'Command Center'})
-
-
-# @login_required
-# def another_view(request):
-#     # Example logic for another view
-#     if request.user.is_authenticated:
-#         # Redirect to the access granted view with the target URL
-#         return HttpResponseRedirect(f'/access-granted/?next=/another-destination/')
-#     else:
-#         return render(request, 'access_denied.html')
 
 
 def hub(request):
@@ -45,3 +35,12 @@ def access_denied(request):
         return redirect(reverse('hub'))  # Replace 'home' with your homepage URL name
     return render(request, 'utilities/access_denied.html', {'title': 'ACCESS DENIED'})
 
+
+def search(request):
+    query = request.GET.get('q')
+    if query:
+        users = CustomUser.objects.filter(username__icontains=query)
+    else:
+        users = None
+
+    return render(request, 'center/search.html', {'results': users})

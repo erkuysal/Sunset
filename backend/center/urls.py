@@ -11,4 +11,5 @@ urlpatterns = [
     # ------- Utilities ------------
     path('granted/', views.access_granted, name='granted'),
     path('denied/', views.access_denied, name='denied'),
+    path('search/', views.search, name='search'),
 ]
