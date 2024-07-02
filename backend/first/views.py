@@ -4,7 +4,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.http import JsonResponse
 
-from .forms import CustomUserForm, SignInForm
+from .forms import CustomUserForm, SignInForm, EditProfileForm
 from .models import CustomUser, Follow
 # Create your views here.
 
@@ -47,7 +47,44 @@ def sign_out(request):
 
 @login_required(login_url='/sign-in/', redirect_field_name='redirect_to')
 def profile(request):
-    return render(request, 'register/profile.html', {'title': 'Profile'})
+    user = request.user
+    if request.method == 'POST':
+        edit_form = EditProfileForm(request.POST, instance=user)
+        if edit_form.is_valid():
+            edit_form.save()
+            return redirect('profile')
+    else:
+        edit_form = EditProfileForm(instance=user)
+
+    return render(request, 'register/profile.html', {
+        'user': user,
+        'edit_form': edit_form,
+        'is_editing': request.method == 'POST' or request.GET.get('edit') == 'true'
+    })
+
+    # user = get_object_or_404(CustomUser, username=username)
+    # if request.user.username == username:
+    #     if request.method == 'POST':
+    #         edit_form = EditProfileForm(request.POST, instance=user)
+    #         if edit_form.is_valid():
+    #             edit_form.save()
+    #             return redirect('profile', username=username)
+    #     else:
+    #         edit_form = EditProfileForm(instance=request.user)
+    #     return render(request, 'register/profile.html', {
+    #         'user': user,
+    #         'profile_form': edit_form,
+    #         'is_editing': request.path.endswith('edit/')
+    #     })
+    # else:
+    #     return render(request, 'register/profile.html', {
+    #         'user': user,
+    #         'is_editing': request.method == 'POST' or request.GET.get('edit') == 'true'
+    #         })
+
+@login_required
+def edit_profile(request, username):
+    return profile(request, username)
 
 
 def view_profile(request, username):

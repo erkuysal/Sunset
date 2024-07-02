@@ -40,3 +40,9 @@ class SignInForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput, required=True)
 
 
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['bio', 'date_of_birth']
+
+

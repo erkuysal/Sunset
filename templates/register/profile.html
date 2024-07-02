@@ -3,18 +3,29 @@
 
 {% block content %}
     <div class="container mt-5 font-8bit">
+
+        {% if is_editing %}
+        <form method="post">
+            {% csrf_token %}
+            {{ edit_form.as_p }}
+            <button type="submit">Save changes</button>
+        </form>
+
+        {% else %}
         <div class="row mb-3">
             <h1 class="d-block" id="username">// {{ user.username }}</h1>
 
             <h3 style="background-color: white; display: block" id="about-me">[ABOUT ME]</h3>
-
+            <p>Bio: {{ user.bio }}</p>
         </div>
 
         <div class="row mb-3">
 
             <div class="col-8" style="background-color: #006b1b" id="user-info">
-                CREDITS
-                <div class="row">HELLO</div>
+                <div class="row">
+                    <p>Email: {{ user.email }}</p>
+                    <p>Birthdate: {{ user.date_of_birth }}</p>
+                </div>
             </div>
 
             <div class="col-4 text-center" style="background-color: #2b542c" id="user-contact">
@@ -27,5 +38,7 @@
             </div>
         </div>
 
+        <a href="?edit=true">Edit Profile</a>
+        {% endif %}
     </div>
 {% endblock %}

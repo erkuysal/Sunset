@@ -6,8 +6,12 @@
         <input type="search" name='q' class="form-control font-3bit" placeholder="Search..." aria-label="Search">
     </form>
 
+    <ul>
     {% for result in results %}
-    	<p class="mt-3">{{ result }}</p>
+        <li class="mt-3">
+            <a class="feed-link-modifier px-3" href="{% url 'view-profile' result %}">{{ result }}</a>
+        </li>
     {% endfor %}
+    </ul>
 
 {% endblock %}
