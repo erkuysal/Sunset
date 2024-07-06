@@ -45,19 +45,23 @@
             </div>
 
             <h3 style="background-color: white; display: block" id="about-me">[ABOUT ME]</h3>
+            <h2 style="display: block" id="about-me">
+                {{ user.bio }}
+            </h2>
 
         </div>
 
         <div class="row mb-3">
 
             <div class="col-8" style="background-color: #006b1b" id="user-info">
-                CREDITS
-                <div class="row">HELLO</div>
+                <div class="row">
+
+                </div>
             </div>
 
             <div class="col-4 text-center" style="background-color: #2b542c" id="user-contact">
-
-
+                <p>Email: {{ user.email }}</p>
+                <p>Birthdate: {{ user.date_of_birth }}</p>
             </div>
         </div>
     </div>

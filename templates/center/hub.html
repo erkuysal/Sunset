@@ -1,5 +1,70 @@
 {% extends 'base.html' %}
 
+{% load static %}
+{% block head %}
+<style>
+    .a-start{
+        text-decoration: none;
+        color: #ffe27f;
+        font-size: xx-large;
+        font-weight: normal;
+    }
+
+    .a-start:hover{
+        color: #422800;
+    }
+
+    .arcade-box{
+        border: 2px solid #292929;
+        border-radius: 5px;
+        cursor: pointer;
+        height: 10vh;
+        width: 20vw;
+        background-color: rgb(41,41, 41);
+        display: inline-block;
+        font-weight: 600;
+        font-size: 1rem;
+        text-align: center;
+        text-decoration: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        margin-bottom: 2rem;
+    }
+
+    .arcade-box:hover {
+        transition: all 0.13s ease-in;
+        box-shadow: #000000 4px 4px 0 0;
+        transform: scale(1.01);
+        color: #000000;
+        background-color: #fff;
+    }
+
+    .arcade-box:active {
+      box-shadow: -10px 10px rgb(255, 164, 0);
+      transform: translateY(4px);
+    }
+
+    .coin {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: yellow;
+        border-radius: 50%;
+        box-shadow:
+            inset 5px 5px 0 0 rgba(255, 255, 0, 0.5),
+            10px 10px 0 0 rgba(255, 215, 0, 0.7);
+        animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(calc(100vh - 50px)); /* Adjust the footer height here */
+        }
+    }
+</style>
+{% endblock %}
+
 {% block content %}
     <header style="margin-top: 50px">
         {% block header %}
@@ -14,17 +79,81 @@
     </div>
 
     {% block main %}
-        <div class="" style="height: 1000px; background-color: rgb(255,235,198)">
+        <div class="text-center d-flex font-8bit" style="height: 70vh; background-color: rgb(255,235,198)">
+            {% if user.is_authenticated %}
 
+
+
+            {% else %}
+            <div class="container" style="align-self: center; padding-bottom: 10vh">
+                <button id="startButton" class="arcade-box">
+                    <a class="a-start">START</a>
+                </button>
+            </div>
+            {% endif %}
         </div>
     {% endblock %}
 
 
-    <div class="bottom-0">
+    <div class="bottom-0 pt-2">
         {% block footer %}
             {% include 'components/footer.html' %}
         {% endblock %}
     </div>
 
+{% endblock %}
+
+
+{% block jscript %}
+ <script>
+    let coinInterval;
+
+    function createCoin(button) {
+        const coin = document.createElement('div');
+        coin.classList.add('coin');
+
+        // Get button position
+        const rect = button.getBoundingClientRect();
+        const randomX = Math.random() * rect.width + rect.left;
+        const randomY = Math.random() * rect.height + rect.top + window.scrollY;
+
+        // Position the coin at the random location within the button area
+        coin.style.left = randomX + 'px';
+        coin.style.top = randomY + 'px';
+
+        document.body.appendChild(coin);
+
+        // Initial parameters
+        const v0 = Math.random() * 500 + 200; // Initial velocity (200 to 700 px/s)
+        const angle = Math.random() * Math.PI  - Math.PI / 2; // Angle between -45 and 45 degrees
+        const g = -981; // Gravitational acceleration in px/s² (9.81 m/s²)
+        const startTime = Date.now();
+
+        function updatePosition() {
+            const t = (Date.now() - startTime) / 1000; // time in seconds
+            const x = v0 * t * Math.cos(angle);
+            const y = v0 * t * Math.sin(angle) - 0.5 * g * t * t;
+
+            coin.style.transform = `translate(${x}px, ${y}px)`;
+
+            if (y + randomY < window.innerHeight) {
+                requestAnimationFrame(updatePosition);
+            } else {
+                coin.remove();
+            }
+        }
+
+        requestAnimationFrame(updatePosition);
+    }
+
+    document.getElementById('startButton').addEventListener('click', (event) => {
+            const button = event.target;
+            coinInterval = setInterval(() => createCoin(button), 100); // Adjust the interval to control the density of the coin rain
+            setTimeout(() => {
+                clearInterval(coinInterval);
+                window.location.href = '{% url 'sign-up' %}'; // Redirect URL
+            }, 10000); // Duration of the coin rain
+        });
+</script>
 {% endblock %}
 
