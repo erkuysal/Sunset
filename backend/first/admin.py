@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django import forms
-from .models import CustomUser
+from .models import CustomUser, Wallet
 
 
 # Define a form for the user model
@@ -65,3 +65,27 @@ class CustomUserAdmin(UserAdmin):
 # Register your models here
 admin.site.register(CustomUser, CustomUserAdmin)
 # ----------------------
+
+
+@admin.register(Wallet)
+class WalletAdmin(admin.ModelAdmin):
+    list_display = ('user', 'coins')
+    search_fields = ('user__username',)
+    list_filter = ('coins',)
+    readonly_fields = ('user',)
+    ordering = ('user',)
+
+    def has_module_permission(self, request):
+        return request.user.is_superuser
+
+    def has_change_permission(self, request, obj=None):
+        return request.user.is_superuser
+
+    def has_view_permission(self, request, obj=None):
+        return request.user.is_superuser
+
+    def has_add_permission(self, request):
+        return request.user.is_superuser
+
+    def has_delete_permission(self, request, obj=None):
+        return request.user.is_superuser

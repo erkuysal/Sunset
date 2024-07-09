@@ -67,3 +67,15 @@ class Follow(models.Model):
         return f'{self.follower_user} follows {self.following_user}'
 
 
+class Wallet(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+#   balance = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    coins = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.user.username}\'s Wallet'
+
+
+
